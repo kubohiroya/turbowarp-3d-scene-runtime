@@ -145,7 +145,7 @@ function checkReadmes() {
     errors.push('README.md must include a version-pinned package example');
   }
   if (!readme.includes('MPL-2.0')) errors.push('README.md License section must include MPL-2.0');
-  if (!readmeJa.startsWith('# TurboWarp-Extension-Template\n')) {
+  if (!readmeJa.startsWith('# TurboWarp-3D-Scene-Runtime\n')) {
     errors.push('README.ja.md must mirror the product H1');
   }
 }
