@@ -1,0 +1,42 @@
+{
+  "extensionName": "TurboWarp-3D-Scene-Runtime",
+  "blocks": [
+    {
+      "opcode": "applyScene",
+      "blockType": "COMMAND",
+      "text": "apply 3D scene [SOURCE]",
+      "description": "Validates a YAML or JSON scene description and builds it by dispatching its call plan to turbowarp-aframe and turbowarp-ar.",
+      "arguments": {
+        "SOURCE": {"type": "STRING", "defaultValue": "formatVersion: 1"}
+      }
+    },
+    {
+      "opcode": "sceneStatus",
+      "blockType": "REPORTER",
+      "text": "3D scene status",
+      "description": "Returns idle, applying, ready, or error.",
+      "arguments": {}
+    },
+    {
+      "opcode": "sceneError",
+      "blockType": "REPORTER",
+      "text": "3D scene error",
+      "description": "Returns the message from the last failed apply, or an empty string.",
+      "arguments": {}
+    },
+    {
+      "opcode": "isSceneReady",
+      "blockType": "BOOLEAN",
+      "text": "3D scene is ready?",
+      "description": "Reports whether the last apply finished without an error.",
+      "arguments": {}
+    },
+    {
+      "opcode": "whenSceneApplied",
+      "blockType": "HAT",
+      "text": "when 3D scene applied",
+      "description": "Fires once each time a scene finishes being applied.",
+      "arguments": {}
+    }
+  ]
+}

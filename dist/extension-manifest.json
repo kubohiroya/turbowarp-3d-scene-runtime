@@ -1,0 +1,37 @@
+{
+  "formatVersion": 1,
+  "id": "kubohiroya3dsceneruntime",
+  "blocks": [
+    {
+      "opcode": "applyScene",
+      "blockType": "COMMAND",
+      "arguments": [
+        {
+          "id": "SOURCE",
+          "type": "STRING"
+        }
+      ]
+    },
+    {
+      "opcode": "isSceneReady",
+      "blockType": "BOOLEAN",
+      "arguments": []
+    },
+    {
+      "opcode": "sceneError",
+      "blockType": "REPORTER",
+      "arguments": []
+    },
+    {
+      "opcode": "sceneStatus",
+      "blockType": "REPORTER",
+      "arguments": []
+    },
+    {
+      "opcode": "whenSceneApplied",
+      "blockType": "HAT",
+      "arguments": []
+    }
+  ],
+  "menus": []
+}

@@ -1,0 +1,6 @@
+allowBuilds:
+  esbuild: false
+minimumReleaseAgeExclude:
+  - '@kubohiroya/vite-plugin-turbowarp-extension@0.3.0'
+  - '@kubohiroya/turbowarp-ar@0.3.0'
+  - '@kubohiroya/turbowarp-scene-graph@0.2.0'
