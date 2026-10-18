@@ -9,9 +9,18 @@ const compiled = {bare: compileSchemaBundle(sceneSchemaBundles.bare), wrapper: c
 export function validateSceneSource(source: string, context: SchemaValidationContext) {
   let decoded: ReturnType<typeof decodeSceneSource>;
   try {decoded = decodeSceneSource(source);} catch {
-    const diagnostics: readonly [InputDiagnostic & {phase: 'decode'}] = [{scope: {identity: sceneSchemaBundles.bare.identity, consumerId: context.consumerId}, phase: 'decode', code: 'input-format-invalid', dataPath: ''}];
+    let consumerId: string | undefined;
+    try {
+      const descriptor = Object.getOwnPropertyDescriptor(context, 'consumerId');
+      if (descriptor && 'value' in descriptor && typeof descriptor.value === 'string') consumerId = descriptor.value;
+    } catch {
+      /* Malformed context must not replace a safe decode diagnostic with a raw exception. */
+    }
+    const diagnostics: readonly [InputDiagnostic & {phase: 'decode'}] = [{scope: {identity: sceneSchemaBundles.bare.identity,
+      ...(consumerId === undefined ? {} : {consumerId})}, phase: 'decode', code: 'input-format-invalid', dataPath: ''}];
     return {source, kind: 'decode-error' as const, result: {kind: 'invalid' as const, diagnostics}};
   }
+  // Empty source performs no validation or execution and does not inspect context.
   if (decoded.kind === 'empty') return {...decoded, result: {kind: 'valid' as const, diagnostics: [] as const}};
   const prepared = compiled[decoded.variantId];
   if (prepared.kind !== 'compiled') return {...decoded, result: prepared};

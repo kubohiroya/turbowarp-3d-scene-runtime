@@ -1,5 +1,11 @@
 # 段階1: 3D scene source adapter
 
+> 現在のGit依存固定・実解決・検証結果は[editor-schema-publication.ja.md](editor-schema-publication.ja.md)と同名JSONを参照。以下は依存更新前の採取履歴として保持する。
+
+> 2026-10-18レビューR2修正追補: 現在はHEADに対するローカル未コミット差分。関連13テストと新しいsource/emit hashをeditor-schema-verification.jsonへ反映した。下記の従来結果は履歴として保持する。
+
+形式不正時のscopeはown data descriptorだけからconsumerIdを取得し、getter/null/undefined contextから生例外を出さない。復号できた非空入力は共通context guardで検査する。空文字/空白は従来のcontext不要なno-opであり、contextを参照せずvalidを返す。この3境界を回帰テストで固定した。
+
 追跡: https://github.com/kubohiroya/turbowarp-3d-scene-runtime/issues/1 。共通親はextension-data-editor #18。
 
 `./editor-schema`はdecodeSceneSource、validateSceneSource、producerのsceneSchemaBundlesを公開する。src/scene-input.tsへ既存planForの分岐を抽出し、runtimeも同じ関数へ委譲する。空文字/空白はempty no-op、scene3d/arキーを持てばwrapper、それ以外のobjectはbare。{}を空wrapperへ読み替えない。元source・format・raw data・variantを保持する。

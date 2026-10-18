@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@kubohiroya/turbowarp-extension-data-editor':
-        specifier: git+https://github.com/kubohiroya/turbowarp-extension-data-editor.git#a1ab4f4f5b384eef08ef26e544186ee9d8ad4543
-        version: https://codeload.github.com/kubohiroya/turbowarp-extension-data-editor/tar.gz/a1ab4f4f5b384eef08ef26e544186ee9d8ad4543(react@18.3.1)
+        specifier: git+https://github.com/kubohiroya/turbowarp-extension-data-editor.git#b5f4b8d2e391a0d57d091c8f3e1c2d58da152dc8
+        version: https://codeload.github.com/kubohiroya/turbowarp-extension-data-editor/tar.gz/b5f4b8d2e391a0d57d091c8f3e1c2d58da152dc8(react@18.3.1)
       '@kubohiroya/turbowarp-scene-graph':
-        specifier: git+https://github.com/kubohiroya/turbowarp-scene-graph.git#7b8d67d47939b688895ed004bdbd035cd0fd6096
-        version: https://codeload.github.com/kubohiroya/turbowarp-scene-graph/tar.gz/7b8d67d47939b688895ed004bdbd035cd0fd6096(react@18.3.1)
+        specifier: git+https://github.com/kubohiroya/turbowarp-scene-graph.git#80fe466e1ec58586ebd131f5fd55dc6e41c4af19
+        version: https://codeload.github.com/kubohiroya/turbowarp-scene-graph/tar.gz/80fe466e1ec58586ebd131f5fd55dc6e41c4af19(react@18.3.1)
       yaml:
         specifier: ^2.9.1
         version: 2.9.1
@@ -123,8 +123,8 @@ packages:
     resolution: {integrity: sha512-Yo1ZYS50NdqW1GYod8oXJAUilBCnp3LX65visgu0rkieese0RXhAaDsNflfsEZe3b9P4PujNXWB5E45toupoyQ==}
     engines: {node: '>=22.18.0'}
 
-  '@kubohiroya/turbowarp-extension-data-editor@https://codeload.github.com/kubohiroya/turbowarp-extension-data-editor/tar.gz/a1ab4f4f5b384eef08ef26e544186ee9d8ad4543':
-    resolution: {gitHosted: true, tarball: https://codeload.github.com/kubohiroya/turbowarp-extension-data-editor/tar.gz/a1ab4f4f5b384eef08ef26e544186ee9d8ad4543}
+  '@kubohiroya/turbowarp-extension-data-editor@https://codeload.github.com/kubohiroya/turbowarp-extension-data-editor/tar.gz/b5f4b8d2e391a0d57d091c8f3e1c2d58da152dc8':
+    resolution: {gitHosted: true, tarball: https://codeload.github.com/kubohiroya/turbowarp-extension-data-editor/tar.gz/b5f4b8d2e391a0d57d091c8f3e1c2d58da152dc8}
     version: 0.1.0
     engines: {node: '>=22'}
     peerDependencies:
@@ -140,8 +140,8 @@ packages:
     resolution: {integrity: sha512-FI2Ei2dSZjIGJWJTXZYnpIwzqVtlg8KRNcRZLdydDdV53I2Yri8Mz6susCuNjSm4awbRPBgNx4ALDawr8M90cw==}
     engines: {node: '>=22'}
 
-  '@kubohiroya/turbowarp-scene-graph@https://codeload.github.com/kubohiroya/turbowarp-scene-graph/tar.gz/7b8d67d47939b688895ed004bdbd035cd0fd6096':
-    resolution: {gitHosted: true, integrity: sha512-6JrRwewo+Ld16gdufrU10noKNIJx3OOrbiHb00flWpbR+DJYPG+xn1NaqQO29bO49cKO3GUElEJXJzFJkS7J1g==, tarball: https://codeload.github.com/kubohiroya/turbowarp-scene-graph/tar.gz/7b8d67d47939b688895ed004bdbd035cd0fd6096}
+  '@kubohiroya/turbowarp-scene-graph@https://codeload.github.com/kubohiroya/turbowarp-scene-graph/tar.gz/80fe466e1ec58586ebd131f5fd55dc6e41c4af19':
+    resolution: {gitHosted: true, integrity: sha512-MTvxPdeIgRaSno+oBE4ZAEk48DyJ/0N42jkzhdDyu0Qky93ile86kzIP3WjbhrxZCoaYaN7LMepmAscax4NYPQ==, tarball: https://codeload.github.com/kubohiroya/turbowarp-scene-graph/tar.gz/80fe466e1ec58586ebd131f5fd55dc6e41c4af19}
     version: 0.2.0
     engines: {node: '>=22'}
 
@@ -1108,7 +1108,7 @@ snapshots:
 
   '@kubohiroya/turbowarp-ar@0.3.0': {}
 
-  '@kubohiroya/turbowarp-extension-data-editor@https://codeload.github.com/kubohiroya/turbowarp-extension-data-editor/tar.gz/a1ab4f4f5b384eef08ef26e544186ee9d8ad4543(react@18.3.1)':
+  '@kubohiroya/turbowarp-extension-data-editor@https://codeload.github.com/kubohiroya/turbowarp-extension-data-editor/tar.gz/b5f4b8d2e391a0d57d091c8f3e1c2d58da152dc8(react@18.3.1)':
     dependencies:
       '@rjsf/core': 5.24.13(@rjsf/utils@5.24.13(react@18.3.1))(react@18.3.1)
       '@rjsf/utils': 5.24.13(react@18.3.1)
@@ -1122,10 +1122,10 @@ snapshots:
 
   '@kubohiroya/turbowarp-extension-manifest@0.2.0': {}
 
-  '@kubohiroya/turbowarp-scene-graph@https://codeload.github.com/kubohiroya/turbowarp-scene-graph/tar.gz/7b8d67d47939b688895ed004bdbd035cd0fd6096(react@18.3.1)':
+  '@kubohiroya/turbowarp-scene-graph@https://codeload.github.com/kubohiroya/turbowarp-scene-graph/tar.gz/80fe466e1ec58586ebd131f5fd55dc6e41c4af19(react@18.3.1)':
     dependencies:
       '@kubohiroya/turbowarp-ar': 0.3.0
-      '@kubohiroya/turbowarp-extension-data-editor': https://codeload.github.com/kubohiroya/turbowarp-extension-data-editor/tar.gz/a1ab4f4f5b384eef08ef26e544186ee9d8ad4543(react@18.3.1)
+      '@kubohiroya/turbowarp-extension-data-editor': https://codeload.github.com/kubohiroya/turbowarp-extension-data-editor/tar.gz/b5f4b8d2e391a0d57d091c8f3e1c2d58da152dc8(react@18.3.1)
       yaml: 2.9.1
     transitivePeerDependencies:
       - react

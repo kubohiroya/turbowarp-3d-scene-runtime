@@ -20,7 +20,7 @@
   	blockIconURI: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCI+PHBhdGggZD0iTTI0IDZsMTYgOXYxOGwtMTYgOS0xNi05VjE1eiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNEM5N0ZGIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjQgMjR2MThNMjQgMjRsMTYtOU0yNCAyNEw4IDE1IiBzdHJva2U9IiM1OUMwNTkiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg=="
   };
   //#endregion
-  //#region node_modules/.pnpm/@kubohiroya+turbowarp-scene-graph@https+++codeload.github.com+kubohiroya+turbowarp-scen_a82c78029f787d705089c38e6c42c8d9/node_modules/@kubohiroya/turbowarp-scene-graph/dist/scene-graph.js
+  //#region node_modules/.pnpm/@kubohiroya+turbowarp-scene-graph@https+++codeload.github.com+kubohiroya+turbowarp-scen_320f23b8911545a4026babe007ee07fb/node_modules/@kubohiroya/turbowarp-scene-graph/dist/scene-graph.js
   var defaultOptions = Object.freeze({
   	layer: "above-stage",
   	mode: "3d"
@@ -6044,7 +6044,7 @@
   	return value.trim().replace(/[^a-zA-Z0-9_-]/g, "-");
   }
   //#endregion
-  //#region node_modules/.pnpm/@kubohiroya+turbowarp-scene-graph@https+++codeload.github.com+kubohiroya+turbowarp-scen_a82c78029f787d705089c38e6c42c8d9/node_modules/@kubohiroya/turbowarp-scene-graph/dist/kamishibai-extension.js
+  //#region node_modules/.pnpm/@kubohiroya+turbowarp-scene-graph@https+++codeload.github.com+kubohiroya+turbowarp-scen_320f23b8911545a4026babe007ee07fb/node_modules/@kubohiroya/turbowarp-scene-graph/dist/kamishibai-extension.js
   function validateKamishibai3DSceneExtension(value) {
   	if (typeof value !== "object" || value === null || Array.isArray(value)) throw new TypeError("Kamishibai 3D scene extension must be an object.");
   	const extension = value;
