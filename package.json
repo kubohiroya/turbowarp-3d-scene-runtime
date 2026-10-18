@@ -70,7 +70,7 @@
     "vitest": "^5.0.0"
   },
   "dependencies": {
-    "@kubohiroya/turbowarp-scene-graph": "git+https://github.com/kubohiroya/turbowarp-scene-graph.git#7235a23718aeea94c952c49de7928af943321f6b",
+    "@kubohiroya/turbowarp-scene-graph": "git+https://github.com/kubohiroya/turbowarp-scene-graph.git#5cb8b7787040f55d968c2e2aa384653e8c6abed5",
     "yaml": "^2.9.1",
     "@kubohiroya/turbowarp-extension-data-editor": "git+https://github.com/kubohiroya/turbowarp-extension-data-editor.git#b5f4b8d2e391a0d57d091c8f3e1c2d58da152dc8"
   },

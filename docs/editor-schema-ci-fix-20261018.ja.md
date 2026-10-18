@@ -1,3 +1,5 @@
+> 件数訂正artifactの現在値はJSONのcount_correction_artifactを参照。下記の以前のproducer更新記述は当時の履歴として保持する。
+
 # 段階1: pack 検査の CI 修正（2026-10-18）
 
 ## 変更と互換性
@@ -27,3 +29,9 @@
 ## producer更新後の検証
 
 scene-graphを7235a237へ固定し、通常frozen installと15テスト・型・lint・docs・build・repo/pack検査が成功。追跡distのcache regionコメントのみ変わり、それらを除いたbyte列は旧HEADと一致した。commit前のcheck:distは未commit差分を正しく検出して停止するため、commit後の全checkをcoordinatorの最終記録で確認する。実行ソースとSchema・データの変更はない。
+
+## 全check件数訂正artifactへの再固定
+
+Scene Graphは66件、8owner合計は1,106件。Scene文書訂正commit `5cb8b7787040f55d968c2e2aa384653e8c6abed5` へmanifest・lock・allowBuilds・実解決を揃え、共通B5とAR0.3.0を維持した。通常clean frozen installが成功。Schema・入力・API・editor生成物は変更しない。追跡bundleは依存cache regionコメントだけの差分で、commit後check:distを最終確認する。
+
+[訂正前記録](history/stage1-counts-before-20261018/snapshot.json)を保持する。この再固定だけを戻す場合はcount_correction_artifact.before_commitのpackage/lock/workspaceを一組で戻し、distを再build・実解決と照合する。保存sourceの移行は不要。

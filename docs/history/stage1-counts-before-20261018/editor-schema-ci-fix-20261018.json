@@ -1,0 +1,108 @@
+{
+  "record_kind": "current stage1 CI fix verification snapshot; own final commit is recorded by coordinator to avoid a self hash cycle",
+  "observed_at_utc": "2026-10-18T07:11:04.913746+00:00",
+  "repository": "kubohiroya/turbowarp-3d-scene-runtime",
+  "branch": "feat/schema/stage1-3d-scene-runtime",
+  "base_before_CI_fix": "2b9b66c612b83aeb8e4c1713d57eb8bec434debc",
+  "PR": "https://github.com/kubohiroya/turbowarp-3d-scene-runtime/pull/2",
+  "issue": "https://github.com/kubohiroya/turbowarp-3d-scene-runtime/issues/1",
+  "common_revision": "b5f4b8d2e391a0d57d091c8f3e1c2d58da152dc8",
+  "dependency_pins": {
+    "@kubohiroya/turbowarp-scene-graph": "git+https://github.com/kubohiroya/turbowarp-scene-graph.git#7235a23718aeea94c952c49de7928af943321f6b",
+    "@kubohiroya/turbowarp-extension-data-editor": "git+https://github.com/kubohiroya/turbowarp-extension-data-editor.git#b5f4b8d2e391a0d57d091c8f3e1c2d58da152dc8"
+  },
+  "configuration_sha256": {
+    "package.json": "b74eb9d5ec419e47d39402402d1efd0ec4157b8ed71d96279d6e709a0c375d71",
+    "pnpm-lock.yaml": "de96807a81b1a3a8f8ef3225d58b771cdaf4f3efdcb636e14088051e39156545",
+    "pnpm-workspace.yaml": "beda9594c3ef24a4f9cb14c25d6e51fcffba424f6c3a3a45c66848a9fe209e03",
+    "tsconfig.editor.json": "719e677d23a27032768057d11778f881e9adf7a911cbcbe3ed4f86704600bbad"
+  },
+  "source_sha256": {
+    "src/globals.d.ts": "4845a5923a10fb49343fe55fa1751c6aee68ea3c9eabb621f48f6f7bf09990b8",
+    "src/extension.ts": "9b88f2f41a829b7c59dc1bf591522d7ab6bdd62db9e9c2d9b86abae6773ebc88",
+    "src/editor-schema.ts": "1ab8eada43d55fa7e3e568046372ea6ac82fbea0ab962d1f3874991de19e9ff5",
+    "src/block-definitions.json": "2c60d177e4ea6785ca98fb47f79c98e1038cc9ccef5f90b4c74d0e27d6db7d57",
+    "src/scene-input.ts": "aa59c6200e49e819c31c514e4ab71a7e8c143abb5e7d7e950ca62fa3267d5d51",
+    "src/index.ts": "8ec086efc72187cd9a4cf0c00d95d2a8217ebe1bfd9bed6f68265b6f4157522d",
+    "src/config.ts": "0287e63ee2b6174e066a6e6603e6e0a64cdab1a380b90e25448559520c1ee0c4"
+  },
+  "emitted_sha256": {
+    "lib-editor/src/editor-schema.d.ts": "f53a978c16ff36e085c857263d6ecf5e8fd83e5577d5cf784df298b27e793d7d",
+    "lib-editor/src/scene-input.d.ts": "35121ce85b366beec93a8e350ec188ffc2372c8ec4ae4f775c5f8750669f1473",
+    "lib-editor/src/editor-schema.js": "c80948a3aa530a8881c759add6e78b8549603ce6f74575615d94c21c032ee58d",
+    "lib-editor/src/scene-input.js": "cd9145ee5c24928632561fcc9c0a012c1e4150e0e64edd3ae56b4047616d6d22"
+  },
+  "resolved_dependencies": [
+    {
+      "name": "@kubohiroya/turbowarp-extension-data-editor",
+      "via": "@kubohiroya/turbowarp-3d-scene-runtime",
+      "specifier": "git+https://github.com/kubohiroya/turbowarp-extension-data-editor.git#b5f4b8d2e391a0d57d091c8f3e1c2d58da152dc8",
+      "resolved_path": "/private/tmp/schema-stage1-worktrees-20261018/3d-scene-runtime/node_modules/.pnpm/@kubohiroya+turbowarp-extension-data-editor@https+++codeload.github.com+kubohiroya+turb_ea9ed4fbe83b895db0a5315e4e7cce4f/node_modules/@kubohiroya/turbowarp-extension-data-editor",
+      "version": "0.1.0",
+      "manifest_sha256": "3e86db1bf667088a7a87ada19fc11573082918335dd281073464ca4fcebf74da",
+      "build_info": {
+        "name": "@kubohiroya/turbowarp-extension-data-editor",
+        "version": "0.1.0",
+        "repository": "https://github.com/kubohiroya/turbowarp-extension-data-editor",
+        "revision": "b5f4b8d2e391a0d57d091c8f3e1c2d58da152dc8"
+      },
+      "rjsf_type_sha256": "6b68cfc2a04c7b730234968bdd6fac380747e2de6631e1752caf07fd8b9b0c90",
+      "rjsf_default_null": true,
+      "pure_files_sha256": {
+        "schema-compose.d.ts": "e9bb269fcb3be82661b692e7fdf5c55ac433a31d699ac591a86bf5358046b83e",
+        "schema-compose.js": "04b32c71920f1ad99425582c3ef57b69b3725f87191efc808ef94e28b8d7bdd2",
+        "schema-engine.d.ts": "36049b8206969175b2e9628b3cf0cb670cb6b10836e28963e5aa32c797882681",
+        "schema-engine.js": "80f203c8c8035ea3e0becd02087dfe3cd5a77ffbcf1a183cbd7976e79294efff",
+        "schema-json.d.ts": "dc0a7644776117235b33129292ec0936bce37f769adb497387a7071508ce4540",
+        "schema-json.js": "367f4deb589286fad3d2c05456cfd8b6859d5e1e2efa22dcd84e629f6d9efddc",
+        "schema-types.d.ts": "4c56872a799cb4e5e59c5ebcd3b889493e082e08c5ad6629b6b1a1c5ae24a3b0",
+        "schema-types.js": "7d29a0d2cb0e10d9c98b299939c91c64fd791f09e1284b5022d8782fa54dad9a",
+        "schema-view.d.ts": "77c66c91b30d4ce06a33f1b8fac153202f64ad68936dda467eae251117132702",
+        "schema-view.js": "7efbcdd76d653b7fb8ce6dcbbe303cc282f6d640793918501717e5dc04bf0a32",
+        "schema.d.ts": "2ad7f9350c391c59d6c641c18120c84926210d7905d0d27e51e58097ced5f7be",
+        "schema.js": "c0acab4248f09489a99ae7f931302a4cf83ad0221027e06a9c6d5b32d6d094b2"
+      }
+    },
+    {
+      "name": "@kubohiroya/turbowarp-scene-graph",
+      "via": "@kubohiroya/turbowarp-3d-scene-runtime",
+      "specifier": "git+https://github.com/kubohiroya/turbowarp-scene-graph.git#7235a23718aeea94c952c49de7928af943321f6b",
+      "resolved_path": "/private/tmp/schema-stage1-worktrees-20261018/3d-scene-runtime/node_modules/.pnpm/@kubohiroya+turbowarp-scene-graph@https+++codeload.github.com+kubohiroya+turbowarp-scen_e972fc00b31c337ba8b7a55b43c727d2/node_modules/@kubohiroya/turbowarp-scene-graph",
+      "version": "0.2.0",
+      "manifest_sha256": "a74496099d1427e56b59fa653de9e7ad6f6c2d8214b762550650e459f1d5c1cf"
+    },
+    {
+      "name": "@kubohiroya/turbowarp-ar",
+      "via": "@kubohiroya/turbowarp-scene-graph",
+      "specifier": "0.3.0",
+      "resolved_path": "/private/tmp/schema-stage1-worktrees-20261018/3d-scene-runtime/node_modules/.pnpm/@kubohiroya+turbowarp-ar@0.3.0/node_modules/@kubohiroya/turbowarp-ar",
+      "version": "0.3.0",
+      "manifest_sha256": "318d4db614f802f299edf9bcbaebef3f6f07ad1631f311ad5ed5d9bfa86a7b47",
+      "plan_js_sha256": "254d0269ca025561699f9073d35a26d118d599f947cc3a03253c78a797442383",
+      "plan_dts_sha256": "c9d8e9624c3c04f8012e590299fd9caaa91a310266f26da4fd3e7ce3c697a881"
+    }
+  ],
+  "verification": {
+    "full_check_tests": 15,
+    "logs_sha256": {
+      "3d-scene-runtime-check.log": "33d89c05e4e98f712d42191d55e1edf3a37627bcacef40acf71553aa92f9ad19",
+      "3d-scene-runtime-frozen.log": "6a1f0da502f89673ca003000fd7d8a9060ed868d42e86cef75627809cf347296",
+      "3d-scene-runtime-postpin-check.log": "fd0bcb465bee82accd7e14903b839e00dd9dfe349ae177fa5c91a1f28d6bef33",
+      "3d-scene-runtime-repo-npm10.log": "6b0c5217e10070716f2a27162d456c7a39f0d7ecb02420ead4c9713a6a5672cf"
+    },
+    "prior_215_135_record": "The reviewed production source and emitted hashes remain the baseline; coordinator stores the new artifact/re-emit/dependency results after all pins align.",
+    "npm10_pack_regression": "foreground-scripts=false keeps prepare output out of JSON where parsed; Camera Source does not parse pack stdout.",
+    "prepin_full_check_passed": true,
+    "postpin_type_lint_tests_build_repo_pack_passed": true,
+    "precommit_full_check": "Stopped only at unchanged git-status dist guard due to reviewed cache-region comments pending commit",
+    "postcommit_full_check": "Must be confirmed after this commit; final result and commit SHA are stored by coordinator"
+  },
+  "compatibility": "Existing runtime APIs, source formats and schema acceptance unchanged; explicit pure entry guards remain strict.",
+  "main_integration": null,
+  "rollback": "Stop new pure/bundle use; restore old pins and matching lock/workspace together or revert the correction commit; source migration is absent. Scene local integration revert uses first parent.",
+  "scope": {
+    "stage2_or_later": false,
+    "PR_merge": false,
+    "npm_publish": false
+  }
+}
