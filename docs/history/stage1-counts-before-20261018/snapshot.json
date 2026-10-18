@@ -1,0 +1,8 @@
+{
+  "record_kind": "historical Runtime dependency snapshot before count-correction artifact",
+  "commit": "8e159de960387875a0d4aa1de0f273c5905d102b",
+  "sha256": {
+    "editor-schema-ci-fix-20261018.json": "39c367b371aa6279d14c6265ce785f09c4bb2a511be66f501db7c1b21b979e0b",
+    "editor-schema-ci-fix-20261018.ja.md": "1e30ade9a255cf8c010ed1112cd0470c1aee8ba7731ac53555f57989b3881783"
+  }
+}
