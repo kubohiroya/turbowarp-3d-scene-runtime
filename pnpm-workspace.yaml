@@ -1,5 +1,5 @@
 allowBuilds:
-  '@kubohiroya/turbowarp-scene-graph@https://codeload.github.com/kubohiroya/turbowarp-scene-graph/tar.gz/80fe466e1ec58586ebd131f5fd55dc6e41c4af19': true
+  '@kubohiroya/turbowarp-scene-graph@https://codeload.github.com/kubohiroya/turbowarp-scene-graph/tar.gz/7235a23718aeea94c952c49de7928af943321f6b': true
   '@kubohiroya/turbowarp-extension-data-editor@https://codeload.github.com/kubohiroya/turbowarp-extension-data-editor/tar.gz/b5f4b8d2e391a0d57d091c8f3e1c2d58da152dc8': true
   esbuild: false
 minimumReleaseAgeExclude:

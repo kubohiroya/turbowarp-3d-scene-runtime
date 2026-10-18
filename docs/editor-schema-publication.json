@@ -118,5 +118,7 @@
     "old_sha256": "ae65be39ef4709748f4dbad858a0c4f27c2f77605dfecf07c245f672e4197354",
     "new_sha256": "1111185f7b0168c108fafec1ce1cc3138b9c9cb63443702c912027dda943f182",
     "bytes_without_region_comment_lines_match": true
-  }
+  },
+  "record_kind": "historical snapshot before CI corrections and producer re-pinning",
+  "current_record": "editor-schema-ci-fix-20261018.json"
 }
