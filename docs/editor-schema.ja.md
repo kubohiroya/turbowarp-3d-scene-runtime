@@ -11,3 +11,9 @@ producerはscene-graph commit 7b8d67d47939b688895ed004bdbd035cd0fd6096、共通�
 確認: 型検査、新adapterと既存extensionの11テスト、Vite/独立emit、srcなし隔離import・strict型成功。隔離検証ではproducer内のARを実際の解決経路から同梱し、直接依存と取り違えない。
 
 段階2のフォーム登録/owner encode/binding、後段の候補UIは未実装。既定OFFのGUIフラグは保持。新pure入口の利用停止/本Issueのcommit revertでrollbackし、保存済みsourceの移行は不要。
+
+## S1-5の最終確認
+
+対象は合計11ケース（増分検証を含む）。srcを除いた実packageでReact不在・DOM/VM/通信globalアクセス0、skipLibCheck:falseの型検査を確認し、独立生成4ファイルを再emitと全SHA-256照合した。16契約の横断fixtureと依存artifact照合の記録は共通repoのschema-stage1-*.jsonを参照。既存生成基準は保持する。
+
+間接ARのversion/所在/plan JS・型hashと、scene-graph→ARのspecifierを実解決から記録した。checkout 0.4.0を代用しない。

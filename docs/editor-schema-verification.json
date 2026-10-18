@@ -2,7 +2,7 @@
   "stage": "S1-4/p",
   "repository": "turbowarp-3d-scene-runtime",
   "issue": "https://github.com/kubohiroya/turbowarp-3d-scene-runtime/issues/1",
-  "base": "aca6edaab457e11f043690c6571ef4c537232148",
+  "base": "bc6adb326b6564dfa6ad5fc105f20d5f47598aae",
   "branch": "feat/schema/stage1-3d-scene-runtime",
   "targeted_tests_passed": 11,
   "typecheck": "passed",
@@ -14,21 +14,43 @@
       "version": "0.1.0",
       "resolved_path": "/private/tmp/schema-stage1-worktrees-20261018/3d-scene-runtime/node_modules/.pnpm/@kubohiroya+turbowarp-extension-data-editor@https+++codeload.github.com+kubohiroya+turb_5f902832b16dc00a1fc95546529ab82c/node_modules/@kubohiroya/turbowarp-extension-data-editor",
       "manifest_sha256": "3e86db1bf667088a7a87ada19fc11573082918335dd281073464ca4fcebf74da",
-      "specifier": "git+https://github.com/kubohiroya/turbowarp-extension-data-editor.git#a1ab4f4f5b384eef08ef26e544186ee9d8ad4543"
+      "specifier": "git+https://github.com/kubohiroya/turbowarp-extension-data-editor.git#a1ab4f4f5b384eef08ef26e544186ee9d8ad4543",
+      "via": "@kubohiroya/turbowarp-3d-scene-runtime"
+    },
+    "@kubohiroya/turbowarp-ar": {
+      "version": "0.3.0",
+      "resolved_path": "/private/tmp/schema-stage1-worktrees-20261018/3d-scene-runtime/node_modules/.pnpm/@kubohiroya+turbowarp-ar@0.3.0/node_modules/@kubohiroya/turbowarp-ar",
+      "manifest_sha256": "318d4db614f802f299edf9bcbaebef3f6f07ad1631f311ad5ed5d9bfa86a7b47",
+      "specifier": "0.3.0",
+      "via": "@kubohiroya/turbowarp-scene-graph",
+      "producer_direct_specifier": "git+https://github.com/kubohiroya/turbowarp-scene-graph.git#7b8d67d47939b688895ed004bdbd035cd0fd6096",
+      "plan_js_sha256": "254d0269ca025561699f9073d35a26d118d599f947cc3a03253c78a797442383",
+      "plan_dts_sha256": "c9d8e9624c3c04f8012e590299fd9caaa91a310266f26da4fd3e7ce3c697a881"
     },
     "@kubohiroya/turbowarp-scene-graph": {
       "version": "0.2.0",
       "resolved_path": "/private/tmp/schema-stage1-worktrees-20261018/3d-scene-runtime/node_modules/.pnpm/@kubohiroya+turbowarp-scene-graph@https+++codeload.github.com+kubohiroya+turbowarp-scen_a82c78029f787d705089c38e6c42c8d9/node_modules/@kubohiroya/turbowarp-scene-graph",
       "manifest_sha256": "458ebc3e7c70547a7d6e71294ee8e3ca256bdca18ef87379d822acb3c9572bb8",
-      "specifier": "git+https://github.com/kubohiroya/turbowarp-scene-graph.git#7b8d67d47939b688895ed004bdbd035cd0fd6096"
+      "specifier": "git+https://github.com/kubohiroya/turbowarp-scene-graph.git#7b8d67d47939b688895ed004bdbd035cd0fd6096",
+      "via": "@kubohiroya/turbowarp-3d-scene-runtime"
     }
   },
   "emitted_sha256": {
     "lib-editor/src/editor-schema.d.ts": "f53a978c16ff36e085c857263d6ecf5e8fd83e5577d5cf784df298b27e793d7d",
     "lib-editor/src/editor-schema.js": "324b202917b9691f7abebb3b82ca0f146ed0155c52bbee609bde7c7d92628acf",
     "lib-editor/src/scene-input.d.ts": "35121ce85b366beec93a8e350ec188ffc2372c8ec4ae4f775c5f8750669f1473",
-    "lib-editor/src/scene-input.js": "9e4abe5dec5b325fcc9110d25dfaa3c32d941e7e4979153a7d6c05ac028b0080"
+    "lib-editor/src/scene-input.js": "cd9145ee5c24928632561fcc9c0a012c1e4150e0e64edd3ae56b4047616d6d22"
   },
+  "source_sha256": {
+    "src/config.ts": "0287e63ee2b6174e066a6e6603e6e0a64cdab1a380b90e25448559520c1ee0c4",
+    "src/editor-schema.ts": "c00f2555f0fd611b6b26a078a3a0995ac23e817118ce3b36a3da2ce330eb4c10",
+    "src/extension.ts": "9b88f2f41a829b7c59dc1bf591522d7ab6bdd62db9e9c2d9b86abae6773ebc88",
+    "src/globals.d.ts": "4845a5923a10fb49343fe55fa1751c6aee68ea3c9eabb621f48f6f7bf09990b8",
+    "src/index.ts": "8ec086efc72187cd9a4cf0c00d95d2a8217ebe1bfd9bed6f68265b6f4157522d",
+    "src/scene-input.ts": "aa59c6200e49e819c31c514e4ab71a7e8c143abb5e7d7e950ca62fa3267d5d51"
+  },
+  "source_emit_hash_matches": 4,
+  "side_effect_guarded_isolated_import": "0 DOM/VM/network global accesses; React absent",
   "scope": {
     "new_extension_editor_registration": false,
     "schema_authoring_UI": false,
