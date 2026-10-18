@@ -1,0 +1,39 @@
+{
+  "stage": "S1-4/p",
+  "repository": "turbowarp-3d-scene-runtime",
+  "issue": "https://github.com/kubohiroya/turbowarp-3d-scene-runtime/issues/1",
+  "base": "aca6edaab457e11f043690c6571ef4c537232148",
+  "branch": "feat/schema/stage1-3d-scene-runtime",
+  "targeted_tests_passed": 11,
+  "typecheck": "passed",
+  "existing_build_and_editor_emit": "passed",
+  "source_absent_isolated_import": "passed",
+  "isolated_no_DOM_skipLibCheck_false": "passed",
+  "resolved_dependencies": {
+    "@kubohiroya/turbowarp-extension-data-editor": {
+      "version": "0.1.0",
+      "resolved_path": "/private/tmp/schema-stage1-worktrees-20261018/3d-scene-runtime/node_modules/.pnpm/@kubohiroya+turbowarp-extension-data-editor@https+++codeload.github.com+kubohiroya+turb_5f902832b16dc00a1fc95546529ab82c/node_modules/@kubohiroya/turbowarp-extension-data-editor",
+      "manifest_sha256": "3e86db1bf667088a7a87ada19fc11573082918335dd281073464ca4fcebf74da",
+      "specifier": "git+https://github.com/kubohiroya/turbowarp-extension-data-editor.git#a1ab4f4f5b384eef08ef26e544186ee9d8ad4543"
+    },
+    "@kubohiroya/turbowarp-scene-graph": {
+      "version": "0.2.0",
+      "resolved_path": "/private/tmp/schema-stage1-worktrees-20261018/3d-scene-runtime/node_modules/.pnpm/@kubohiroya+turbowarp-scene-graph@https+++codeload.github.com+kubohiroya+turbowarp-scen_a82c78029f787d705089c38e6c42c8d9/node_modules/@kubohiroya/turbowarp-scene-graph",
+      "manifest_sha256": "458ebc3e7c70547a7d6e71294ee8e3ca256bdca18ef87379d822acb3c9572bb8",
+      "specifier": "git+https://github.com/kubohiroya/turbowarp-scene-graph.git#7b8d67d47939b688895ed004bdbd035cd0fd6096"
+    }
+  },
+  "emitted_sha256": {
+    "lib-editor/src/editor-schema.d.ts": "f53a978c16ff36e085c857263d6ecf5e8fd83e5577d5cf784df298b27e793d7d",
+    "lib-editor/src/editor-schema.js": "324b202917b9691f7abebb3b82ca0f146ed0155c52bbee609bde7c7d92628acf",
+    "lib-editor/src/scene-input.d.ts": "35121ce85b366beec93a8e350ec188ffc2372c8ec4ae4f775c5f8750669f1473",
+    "lib-editor/src/scene-input.js": "9e4abe5dec5b325fcc9110d25dfaa3c32d941e7e4979153a7d6c05ac028b0080"
+  },
+  "scope": {
+    "new_extension_editor_registration": false,
+    "schema_authoring_UI": false,
+    "arbitrary_schema_UI": false,
+    "GUI_dependency_change": false,
+    "cause_investigation": false
+  }
+}

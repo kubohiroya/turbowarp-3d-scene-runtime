@@ -1,4 +1,6 @@
 allowBuilds:
+  '@kubohiroya/turbowarp-scene-graph@https://codeload.github.com/kubohiroya/turbowarp-scene-graph/tar.gz/7b8d67d47939b688895ed004bdbd035cd0fd6096': true
+  '@kubohiroya/turbowarp-extension-data-editor@https://codeload.github.com/kubohiroya/turbowarp-extension-data-editor/tar.gz/a1ab4f4f5b384eef08ef26e544186ee9d8ad4543': true
   esbuild: false
 minimumReleaseAgeExclude:
   - '@kubohiroya/vite-plugin-turbowarp-extension@0.3.0'

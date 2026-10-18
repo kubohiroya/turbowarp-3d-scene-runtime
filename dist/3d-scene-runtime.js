@@ -20,7 +20,7 @@
   	blockIconURI: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCI+PHBhdGggZD0iTTI0IDZsMTYgOXYxOGwtMTYgOS0xNi05VjE1eiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNEM5N0ZGIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48cGF0aCBkPSJNMjQgMjR2MThNMjQgMjRsMTYtOU0yNCAyNEw4IDE1IiBzdHJva2U9IiM1OUMwNTkiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg=="
   };
   //#endregion
-  //#region node_modules/.pnpm/@kubohiroya+turbowarp-scene-graph@0.2.0/node_modules/@kubohiroya/turbowarp-scene-graph/dist/scene-graph.js
+  //#region node_modules/.pnpm/@kubohiroya+turbowarp-scene-graph@https+++codeload.github.com+kubohiroya+turbowarp-scen_a82c78029f787d705089c38e6c42c8d9/node_modules/@kubohiroya/turbowarp-scene-graph/dist/scene-graph.js
   var defaultOptions = Object.freeze({
   	layer: "above-stage",
   	mode: "3d"
@@ -6044,7 +6044,7 @@
   	return value.trim().replace(/[^a-zA-Z0-9_-]/g, "-");
   }
   //#endregion
-  //#region node_modules/.pnpm/@kubohiroya+turbowarp-scene-graph@0.2.0/node_modules/@kubohiroya/turbowarp-scene-graph/dist/kamishibai-extension.js
+  //#region node_modules/.pnpm/@kubohiroya+turbowarp-scene-graph@https+++codeload.github.com+kubohiroya+turbowarp-scen_a82c78029f787d705089c38e6c42c8d9/node_modules/@kubohiroya/turbowarp-scene-graph/dist/kamishibai-extension.js
   function validateKamishibai3DSceneExtension(value) {
   	if (typeof value !== "object" || value === null || Array.isArray(value)) throw new TypeError("Kamishibai 3D scene extension must be an object.");
   	const extension = value;
@@ -6071,6 +6071,33 @@
   	if (normalized.scene3d !== void 0) calls.push(...createAFrameSceneGraphPlan(normalized.scene3d));
   	if (normalized.ar !== void 0) calls.push(...createTurboWarpARScenePlan(normalized.ar));
   	return calls;
+  }
+  //#endregion
+  //#region src/scene-input.ts
+  /** Same branch selection as runtime planFor, with raw source/data retained. */
+  function decodeSceneSource(source) {
+  	const trimmed = source.trim();
+  	if (trimmed.length === 0) return {
+  		kind: "empty",
+  		source,
+  		variantId: "empty"
+  	};
+  	const data = parse(trimmed);
+  	if (typeof data !== "object" || data === null || Array.isArray(data)) throw new TypeError("3D scene description must be a YAML or JSON object.");
+  	const keys = Object.keys(data);
+  	const variantId = keys.includes("scene3d") || keys.includes("ar") ? "wrapper" : "bare";
+  	let format = "yaml";
+  	try {
+  		JSON.parse(trimmed);
+  		format = "json";
+  	} catch {}
+  	return {
+  		kind: "decoded",
+  		source,
+  		data,
+  		format,
+  		variantId
+  	};
   }
   var block_definitions_default = {
   	extensionName: "TurboWarp-3D-Scene-Runtime",
@@ -6193,12 +6220,9 @@
   	* that only builds 3D should not have to nest its document under a key.
   	*/
   	planFor(source) {
-  		const trimmed = source.trim();
-  		if (trimmed.length === 0) return [];
-  		const value = parse(trimmed);
-  		if (typeof value !== "object" || value === null || Array.isArray(value)) throw new TypeError("3D scene description must be a YAML or JSON object.");
-  		const keys = Object.keys(value);
-  		return createTurboWarpExtensionPlan(keys.includes("scene3d") || keys.includes("ar") ? value : { scene3d: value });
+  		const decoded = decodeSceneSource(source);
+  		if (decoded.kind === "empty") return [];
+  		return createTurboWarpExtensionPlan(decoded.variantId === "wrapper" ? decoded.data : { scene3d: decoded.data });
   	}
   	async dispatch(calls) {
   		if (calls.length === 0) return;

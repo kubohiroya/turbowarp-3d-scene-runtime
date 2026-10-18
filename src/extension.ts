@@ -2,7 +2,7 @@ import {
   createTurboWarpExtensionPlan,
   type TurboWarpExtensionCall
 } from '@kubohiroya/turbowarp-scene-graph';
-import {parse as parseYaml} from 'yaml';
+import {decodeSceneSource} from './scene-input.js';
 
 import {extensionConfig} from './config';
 import definitions from './block-definitions.json';
@@ -127,15 +127,9 @@ export class TurboWarp3DSceneRuntimeExtension implements TurboWarpExtension {
    * that only builds 3D should not have to nest its document under a key.
    */
   private planFor(source: string): TurboWarpExtensionCall[] {
-    const trimmed = source.trim();
-    if (trimmed.length === 0) return [];
-    const value: unknown = parseYaml(trimmed);
-    if (typeof value !== 'object' || value === null || Array.isArray(value)) {
-      throw new TypeError('3D scene description must be a YAML or JSON object.');
-    }
-    const keys = Object.keys(value);
-    const fragment =
-      keys.includes('scene3d') || keys.includes('ar') ? value : {scene3d: value};
+    const decoded = decodeSceneSource(source);
+    if (decoded.kind === 'empty') return [];
+    const fragment = decoded.variantId === 'wrapper' ? decoded.data : {scene3d: decoded.data};
     return createTurboWarpExtensionPlan(fragment as Parameters<typeof createTurboWarpExtensionPlan>[0]);
   }
 
