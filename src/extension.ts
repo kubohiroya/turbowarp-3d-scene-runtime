@@ -1,3 +1,4 @@
+import {registerSourceEditors} from './source-editors.js';
 import {
   createTurboWarpExtensionPlan,
   type TurboWarpExtensionCall
@@ -70,6 +71,19 @@ export class TurboWarp3DSceneRuntimeExtension implements TurboWarpExtension {
   private appliedEvents = 0;
   /** Guards against two applies interleaving their calls into one scene. */
   private applyGeneration = 0;
+
+  private readonly removeSourceEditors: () => void;
+  private readonly handleSourceEditorDispose = (): void => {
+    this.removeSourceEditors();
+    const runtime = Scratch.vm?.runtime as {off?: (event: string, listener: () => void) => void} | undefined;
+    runtime?.off?.('RUNTIME_DISPOSED', this.handleSourceEditorDispose);
+  };
+
+  public constructor() {
+    this.removeSourceEditors = registerSourceEditors(Scratch);
+    const runtime = Scratch.vm?.runtime as {on?: (event: string, listener: () => void) => void} | undefined;
+    runtime?.on?.('RUNTIME_DISPOSED', this.handleSourceEditorDispose);
+  }
 
   public getInfo(): Record<string, unknown> {
     return {
@@ -227,10 +241,13 @@ export class TurboWarp3DSceneRuntimeExtension implements TurboWarpExtension {
   }
 
   private toScratchBlock(block: BlockDefinition): Record<string, unknown> {
+    const text = Scratch.translate(block.text);
+    // Separate a leading digit from the VM's icon placeholder ("%2" + "3D" becomes "%23D").
+    const displayText = /^\d/u.test(text) ? ` ${text}` : text;
     return {
       opcode: block.opcode,
       blockType: Scratch.BlockType[block.blockType],
-      text: Scratch.translate(block.text),
+      text: displayText,
       ...(block.blockType === 'HAT' ? {isEdgeActivated: false} : {}),
       arguments: Object.fromEntries(
         Object.entries(block.arguments).map(([name, argument]) => [

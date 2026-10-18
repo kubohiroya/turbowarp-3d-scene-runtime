@@ -32,13 +32,13 @@ companion extensions; camera access, network access, and DOM ownership stay with
 Load the companion extensions first, then this one, as unsandboxed custom extensions.
 
 ```text
-https://cdn.jsdelivr.net/npm/@kubohiroya/turbowarp-3d-scene-runtime@0.1.0/dist/3d-scene-runtime.js
+https://cdn.jsdelivr.net/npm/@kubohiroya/turbowarp-3d-scene-runtime@0.2.0/dist/3d-scene-runtime.js
 ```
 
 For local development:
 
 ```bash
-pnpm add @kubohiroya/turbowarp-3d-scene-runtime@0.1.0
+pnpm add @kubohiroya/turbowarp-3d-scene-runtime@0.2.0
 ```
 
 ## Quick start
