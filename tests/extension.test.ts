@@ -1,3 +1,4 @@
+import definitions from '../src/block-definitions.json';
 import {afterEach, beforeEach, describe, expect, it, vi} from 'vitest';
 
 import {TurboWarp3DSceneRuntimeExtension} from '../src/extension.js';
@@ -184,5 +185,24 @@ describe('TurboWarp3DSceneRuntimeExtension', () => {
 
     expect(extension.sceneStatus()).toBe('ready');
     expect(aframe.createScene).not.toHaveBeenCalled();
+  });
+});
+
+describe('palette text compatibility', () => {
+  it('separates digit-leading reporter labels while preserving opcodes and arguments', () => {
+    const info = new TurboWarp3DSceneRuntimeExtension().getInfo() as {blocks: {opcode: string; text: string; arguments: Record<string, unknown>}[]};
+    expect(info.blocks.map(block => block.opcode)).toEqual(definitions.blocks.map(block => block.opcode));
+    for (const block of info.blocks) {
+      const definition = definitions.blocks.find(definition => definition.opcode === block.opcode)!;
+      expect(block.arguments).toEqual(Object.fromEntries(Object.entries(definition.arguments).map(([name, argument]) => [name, {type: Scratch.ArgumentType[argument.type as 'STRING'], defaultValue: argument.defaultValue}])));
+      expect(block.text).toBe(/^\d/u.test(definition.text) ? ` ${definition.text}` : definition.text);
+    }
+    expect(info.blocks.filter(block => block.text.startsWith(' 3D')).map(block => block.opcode)).toEqual(['sceneStatus', 'sceneError', 'isSceneReady']);
+  });
+
+  it('separates translated digit-leading text without depending on the original English label', () => {
+    vi.stubGlobal('Scratch', {...Scratch, translate: () => '9 localized label'});
+    const info = new TurboWarp3DSceneRuntimeExtension().getInfo() as {blocks: {text: string}[]};
+    expect(info.blocks.every(block => block.text === ' 9 localized label')).toBe(true);
   });
 });

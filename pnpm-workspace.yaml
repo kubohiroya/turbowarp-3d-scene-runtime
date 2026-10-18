@@ -1,8 +1,11 @@
 allowBuilds:
-  '@kubohiroya/turbowarp-scene-graph@https://codeload.github.com/kubohiroya/turbowarp-scene-graph/tar.gz/5cb8b7787040f55d968c2e2aa384653e8c6abed5': true
-  '@kubohiroya/turbowarp-extension-data-editor@https://codeload.github.com/kubohiroya/turbowarp-extension-data-editor/tar.gz/b5f4b8d2e391a0d57d091c8f3e1c2d58da152dc8': true
+  '@kubohiroya/turbowarp-scene-graph@https://codeload.github.com/kubohiroya/turbowarp-scene-graph/tar.gz/1094f2885ede04d87c384ba73296c8dfd35c5546': true
+  '@kubohiroya/turbowarp-extension-data-editor@https://codeload.github.com/kubohiroya/turbowarp-extension-data-editor/tar.gz/76fa1d50a3c188082ceef723ea018a9d8769ea6e': true
   esbuild: false
 minimumReleaseAgeExclude:
   - '@kubohiroya/vite-plugin-turbowarp-extension@0.3.0'
   - '@kubohiroya/turbowarp-ar@0.3.0'
   - '@kubohiroya/turbowarp-scene-graph@0.2.0'
+
+overrides:
+  fast-uri: 3.1.8
