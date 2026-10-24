@@ -75,3 +75,18 @@ it('allows explicit Source repair to the declared empty variant without selectin
  session.setDraft({sources: {SOURCE: {mode: 'source', source: ' \n', sourceEdited: true}}});
  expect(await session.save()).toEqual({status: 'saved', changed: true});expect(candidates).toEqual([' \n']);remove();
 });
+
+it('keeps GUI Schema and owner validation active after removing the runtime compiler', async () => {
+ const service = createBlockEditorService();const remove = registerSourceEditors({gui: {blockEditors: service.api}});
+ const source = '# original\nformatVersion: 1\nroot: {}\n';
+ const live = {targetId: 'sprite', blockId: 'root', opcode: `${extensionConfig.id}_applyScene`, revision: '1',
+  arguments: {SOURCE: {kind: 'literal' as const, value: source}}};
+ const candidates: string[] = [];
+ const session = service.registry.open(live, {readBlock: () => live, commit: request => {candidates.push(request.changes[0]!.value as string);}})!;
+ session.setDraft({sources: {SOURCE: {mode: 'source', source: 'formatVersion: 2\nroot: {}', sourceEdited: true}}});
+ expect((await session.save()).status).toBe('invalid');expect(candidates).toEqual([]);expect(live.arguments.SOURCE.value).toBe(source);
+ const updated = 'formatVersion: 1\nroot:\n  id: changed\n';
+ session.setDraft({sources: {SOURCE: {mode: 'source', source: updated, sourceEdited: true}}});
+ expect(await session.save()).toEqual({status: 'saved', changed: true});expect(candidates).toEqual([updated]);
+ session.dispose();remove();
+});

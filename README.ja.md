@@ -6,6 +6,9 @@ TurboWarp-3D-Scene-Runtime は、YAML または JSON で書いた 3D/AR シー�
 
 記述が唯一の真実のまま残ります。ブロック列へコンパイルしないので、編集したシーンの再適用はブロック1回の呼び出しで済み、プロジェクトを書き換える必要がありません。
 
+`./editor-metadata`と既存`./editor-schema`はSchema宣言とpure owner検証を提供し、編集用Schema compileとAjvは共通GUIが担当します。
+詳細と互換性は[編集とruntimeの境界](docs/editor-runtime-boundary.ja.md)を参照してください。
+
 ## できること
 
 - scene graph document、または両方を持つ `{scene3d, ar}` 断片を受け取ります。

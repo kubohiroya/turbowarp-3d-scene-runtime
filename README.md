@@ -9,6 +9,8 @@ description; the extension validates it, turns it into a call plan, and builds t
 The description stays the source of truth. Nothing is compiled into blocks, so re-applying an edited
 scene is one block call rather than a rewritten project.
 
+Editor metadata and pure owner validation are available through `./editor-metadata`; the common GUI owns Schema compilation and Ajv. See [the runtime/editor boundary](docs/editor-runtime-boundary.ja.md) for compatibility and rollback details.
+
 ## What it does
 
 - Accepts a scene graph document, or a `{scene3d, ar}` fragment carrying both halves.
