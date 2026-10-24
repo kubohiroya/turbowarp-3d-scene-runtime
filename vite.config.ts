@@ -24,6 +24,10 @@ export default defineConfig({
       generateBundle(_options, bundle) {
         for (const output of Object.values(bundle)) {
           if (output.type === 'chunk') {
+            // Playback keeps owner validation; Schema compilers and editor UI belong to the GUI.
+            const editorEngine = Object.keys(output.modules).find(id =>
+              /\/node_modules\/(?:.*\/)?(?:@kubohiroya\/turbowarp-extension-data-editor|ajv|ajv-formats|fast-uri|react|react-dom|@rjsf\/[^/]+)(?:\/|$)/u.test(id));
+            if (editorEngine) this.error(`3D Scene runtime includes an editor engine: ${editorEngine}`);
             // Rolldown region comments contain machine-specific dependency paths.
             output.code = output.code.replace(
               /^[ \t]*\/\/#(?:end)?region\b[^\r\n]*(?:\r?\n|$)/gmu,

@@ -6,6 +6,9 @@ TurboWarp-3D-Scene-Runtime は、YAML または JSON で書いた 3D/AR シー�
 
 記述が唯一の真実のまま残ります。ブロック列へコンパイルしないので、編集したシーンの再適用はブロック1回の呼び出しで済み、プロジェクトを書き換える必要がありません。
 
+`./editor-metadata`と既存`./editor-schema`はSchema宣言とpure owner検証を提供し、編集用Schema compileとAjvは共通GUIが担当します。
+詳細と互換性は[編集とruntimeの境界](docs/editor-runtime-boundary.ja.md)を参照してください。
+
 ## できること
 
 - scene graph document、または両方を持つ `{scene3d, ar}` 断片を受け取ります。
@@ -86,6 +89,8 @@ ar:
 拡張 ID は `kubohiroya3dsceneruntime` です。拡張 ID や opcode 名の変更には SB3 の移行計画が必要です。
 
 ## 開発
+
+production依存はscene-graph 0.2.3（上流AR 0.4.2）とyamlです。data-editorは型・編集契約テスト用の開発依存とし、`pnpm run check:production-deps`で推移的なAjv／編集engineの混入を検出します。未公開候補の検証方法と公開順序は[編集境界](docs/editor-runtime-boundary.ja.md)を参照してください。
 
 ```bash
 corepack enable

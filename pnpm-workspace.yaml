@@ -3,8 +3,8 @@ allowBuilds:
 overrides:
   fast-uri: 3.1.8
 minimumReleaseAgeExclude:
-  - '@kubohiroya/turbowarp-ar@0.4.1'
+  - '@kubohiroya/turbowarp-ar@0.4.2'
   - '@kubohiroya/turbowarp-extension-data-editor@0.2.1'
   - '@kubohiroya/turbowarp-extension-manifest@0.3.2'
-  - '@kubohiroya/turbowarp-scene-graph@0.2.2'
+  - '@kubohiroya/turbowarp-scene-graph@0.2.3'
   - '@kubohiroya/vite-plugin-turbowarp-extension@0.6.1'
