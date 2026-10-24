@@ -146,6 +146,48 @@ Fires once each time a scene finishes being applied.
 The extension ID is `kubohiroya3dsceneruntime`. Changing the extension ID or opcode names requires
 an SB3 migration plan.
 
+## Integrated-build module API
+
+Building this source also produces a `./bundle-module` ESM entry and declarations
+in `lib-module/`. This entry is separate from the standalone JavaScript file.
+
+```ts
+import {bundleModuleMetadata, createExtension, type ScratchApi}
+  from '@kubohiroya/turbowarp-3d-scene-runtime/bundle-module';
+
+export function createMember(memberScratch: ScratchApi) {
+  return createExtension(memberScratch);
+}
+```
+
+Importing the entry does not access global Scratch / window / document or create
+and register an extension. Each explicit createExtension(memberScratch) call
+returns a fresh instance bound to that host, including deferred block execution,
+editor helpers and lifecycle callbacks. The factory does not call
+Scratch.extensions.register; the standalone entry uses the same factory and
+registers exactly once.
+
+The frozen bundleModuleMetadata declares formatVersion: 1, the original id and
+unsandboxed requirement. An integrated host validates these before creation and
+owns registration and disposal. Existing IDs, opcodes and saved data stay unchanged.
+
+Scene parsing and A-Frame/AR dispatch retain their behavior and use the injected runtime capabilities. The explicit, idempotent dispose() releases this instance editor registrations and listener; RUNTIME_DISPOSED calls the same cleanup. It does not destroy scenes owned by A-Frame or AR. Internal callers constructing TurboWarp3DSceneRuntimeExtension directly now pass the host explicitly.
+
+Runtime dependencies (including yaml and their subpaths) remain external imports.
+Only the existing small, pure development-time editor helpers are included, so
+production consumers need no editor package or GUI engine. Public types use the
+same ES2022 libraries as the project tsconfig; generated JavaScript targets ES2020.
+The package retains its existing exports and adds ./bundle-module; no template
+runtime dependency is required.
+
+pnpm run build:module builds this entry; pnpm run check:module packs and installs
+the actual package with production dependencies only, checks host isolation,
+standalone parity and public types, and rejects editor-engine dependency leaks.
+The integrated sb3-toolchain build remains a later step in
+[sb3-toolchain #65](https://github.com/kubohiroya/sb3-toolchain/issues/65).
+To roll back, continue loading the existing classic dist artifact without selecting
+this module entry. No runtime flag or saved-data migration is introduced.
+
 ## Development
 
 Production dependencies are scene-graph 0.2.3 (with upstream AR 0.4.2) and yaml. Data-editor is a development dependency for types and editor contract tests; `pnpm run check:production-deps` rejects transitive Ajv and editor engines. See the [editor boundary notes](docs/editor-runtime-boundary.ja.md) for candidate verification and publication order.
