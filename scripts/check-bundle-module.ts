@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import {execFile} from 'node:child_process';
-import {copyFile, mkdtemp, readFile, rm, writeFile} from 'node:fs/promises';
+import {copyFile, mkdtemp, readFile, readdir, rm, writeFile} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -12,9 +12,13 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const metadata = JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8'));
 const temporary = await mkdtemp(path.join(tmpdir(), 'turbowarp-owner-module-'));
 try {
-  const {stdout} = await run('npm', ['pack', '--ignore-scripts', '--json', '--pack-destination', temporary], {cwd: root});
-  const [packed] = JSON.parse(stdout) as {filename: string}[];
-  assert.ok(packed);
+  await run('npm', ['pack', '--ignore-scripts', '--json', '--pack-destination', temporary], {cwd: root});
+  // Some npm versions include prepare output before their JSON response.
+  const tarballs = (await readdir(temporary)).filter(file => file.endsWith('.tgz'));
+  assert.equal(tarballs.length, 1, 'Expected exactly one packed owner artifact.');
+  const [filename] = tarballs;
+  assert.ok(filename);
+  const packed = {filename};
   const dependencies = Object.fromEntries(Object.keys(metadata.peerDependencies ?? {}).map(name =>
     [name, metadata.devDependencies[name] ?? metadata.peerDependencies[name]]));
   await writeFile(path.join(temporary, 'package.json'), JSON.stringify({private: true, type: 'module', dependencies}));
