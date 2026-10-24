@@ -12,8 +12,8 @@ importers:
   .:
     dependencies:
       '@kubohiroya/turbowarp-scene-graph':
-        specifier: 0.2.2
-        version: 0.2.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 0.2.3
+        version: 0.2.3
       yaml:
         specifier: ^2.9.1
         version: 2.9.1
@@ -125,8 +125,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@kubohiroya/turbowarp-ar@0.4.1':
-    resolution: {integrity: sha512-U9frTOeuUgU4Q/Iy2PzJ5K/FuRt3+Mkie9FlJMYg0/hMEhpbL97Kq8NHoIUFj8DjTxVtvHH5+rPG2lBhmzFIYA==}
+  '@kubohiroya/turbowarp-ar@0.4.2':
+    resolution: {integrity: sha512-8Hij9M2u7+HuWAhyhIpzhuSpmk00Tr9nju3JALbNx0wA2ns4Wafm4bTEn7DRBc+Qf5mFfhRnpSCxZXDfx0QKpA==}
     engines: {node: '>=22.18.0'}
 
   '@kubohiroya/turbowarp-extension-data-editor@0.2.1':
@@ -145,8 +145,8 @@ packages:
     resolution: {integrity: sha512-o0l/qk6+v67K456Bys6qnSiw2COYEdGyDwsclVISVGPGTTYyMQp3DKFp4pG7Kq1Qf/RQ+Qv8ZWs4deEh7RJG4A==}
     engines: {node: '>=22'}
 
-  '@kubohiroya/turbowarp-scene-graph@0.2.2':
-    resolution: {integrity: sha512-CcIMWivRO1+gJjH92hBXWxCPxfZsLYc7w+8sU84lUF6M0rl7RYcrfRGziocrW8APbE4CWeMmCAxBokAFvWXSAA==}
+  '@kubohiroya/turbowarp-scene-graph@0.2.3':
+    resolution: {integrity: sha512-hL1KUKWrSmw96KqlQKKROFmkL5x7TAKcXXtprVYIcU5D0jnAdB+VnauDzcXAR9XSrwH5Bok/lQnKWZT+dCafqQ==}
     engines: {node: '>=22'}
 
   '@kubohiroya/vite-plugin-turbowarp-extension@0.6.1':
@@ -1118,12 +1118,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@kubohiroya/turbowarp-ar@0.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@kubohiroya/turbowarp-extension-data-editor': 0.2.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-    transitivePeerDependencies:
-      - react
-      - react-dom
+  '@kubohiroya/turbowarp-ar@0.4.2': {}
 
   '@kubohiroya/turbowarp-extension-data-editor@0.2.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -1140,14 +1135,10 @@ snapshots:
 
   '@kubohiroya/turbowarp-extension-manifest@0.3.2': {}
 
-  '@kubohiroya/turbowarp-scene-graph@0.2.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@kubohiroya/turbowarp-scene-graph@0.2.3':
     dependencies:
-      '@kubohiroya/turbowarp-ar': 0.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@kubohiroya/turbowarp-extension-data-editor': 0.2.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@kubohiroya/turbowarp-ar': 0.4.2
       yaml: 2.9.1
-    transitivePeerDependencies:
-      - react
-      - react-dom
 
   '@kubohiroya/vite-plugin-turbowarp-extension@0.6.1(vite@8.3.0(@types/node@24.13.6)(jiti@2.7.0)(yaml@2.9.1))':
     dependencies:

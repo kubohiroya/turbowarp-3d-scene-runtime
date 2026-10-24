@@ -90,6 +90,8 @@ ar:
 
 ## 開発
 
+production依存はscene-graph 0.2.3（上流AR 0.4.2）とyamlです。data-editorは型・編集契約テスト用の開発依存とし、`pnpm run check:production-deps`で推移的なAjv／編集engineの混入を検出します。未公開候補の検証方法と公開順序は[編集境界](docs/editor-runtime-boundary.ja.md)を参照してください。
+
 ```bash
 corepack enable
 pnpm install --frozen-lockfile

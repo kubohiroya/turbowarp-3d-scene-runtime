@@ -17,8 +17,13 @@ GUI/DOM/VMなし、data-editor package未導入の隔離環境で両入口をimp
 型宣言の共通型を使うTypeScript consumerは自身の開発依存にdata-editorを追加する。
 
 data-editorの直接依存はdevDependenciesへ移す。standaloneとmetadataの実行graphにはAjv／Schema compilerを含めない。
-ただし現行の上流scene-graph 0.2.2はdata-editorをproduction依存として宣言しているため、npmの推移的な
-インストール依存は残る。本変更の「実行graph・配布JSからの除去」とは区別する。上流宣言の整理とそのreleaseは別途必要である。
+推移的なインストール依存についても、scene-graphの型参照・契約テスト用data-editorと、上流ARの固定入力用data-editorを
+開発依存へ移す。ARの純粋な数値parserはビルド時に取り込み、GUIのSchema compiler・Ajv・フォーム描画は含めない。
+依存は `3D Scene Runtime → scene-graph 0.2.3 → AR 0.4.2` とし、yamlはruntime機能として維持する。
+
+`pnpm run check:production-deps`はインストール済みpackageのdependencies・optionalDependencies・peerDependenciesを
+推移的に辿り、data-editor／Ajv／ajv-formats／RJSF／Reactの混入と必須依存の欠落を検出する。
+各packageのdevDependenciesは辿らないため、開発環境でSchema契約テストや型検査を継続できる。
 
 空sourceのcontext-freeなno-op、bare/wrapper/JSON/YAMLの分岐、owner受理条件、既存opcode・保存形式を維持する。
 GUIなし/旧GUI/編集フラグOFFでも通常blockを実行できる。通常のYAML解析はruntime機能として維持する。
@@ -37,3 +42,12 @@ yaml共有化は[sb3-toolchain #65](https://github.com/kubohiroya/sb3-toolchain/
 - GUIなしVMで通常登録1回、Ajv生成0回、編集用SchemaBundle compile 0回。2拡張をsb3-toolchain 0.16.0で束ねても同じ結果。
 - 共通サービス経由のSchema制約拒否、owner受理条件、raw no-op／変更時commit、旧GUIでの非登録、隔離metadata importを確認。
 - 実ブラウザ・3D描画・実カメラの確認、push、PR、merge、npm公開はこのローカル検証に含めない。
+
+## 推移依存の公開順序
+
+AR 0.4.2 → scene-graph 0.2.3の順に公開し、その後に本consumerを公開する。
+ローカル検証時点では上流2版は未公開候補であり、候補tarballを提供するlocalhostのregistryで依存解決・frozen installを確認する。
+lockのintegrityは候補tarballの実バイトから得た値であり、公開時も同一tarballを使う。
+通常のnpm registryでこのexact pinをインストールできるようになるには、上流の公開が必要である。
+consumerのpackage.jsonとlockにはlocalhost URL・file依存・依存の強制除外を残さない。
+公開後はregistryのintegrityをlockと照合し、相違があればpinとlockを実公開物に合わせて再検証する。
