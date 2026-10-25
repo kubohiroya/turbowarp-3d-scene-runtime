@@ -1,5 +1,7 @@
 # TurboWarp-3D-Scene-Runtime
 
+<img src="assets/block-icon.svg" alt="" width="48" height="48">
+
 [English](README.md) | **日本語**
 
 TurboWarp-3D-Scene-Runtime は、YAML または JSON で書いた 3D/AR シーンを適用する拡張です。1つのブロックが記述を受け取り、検証して呼び出し計画へ変換し、`turbowarp-aframe` と `turbowarp-ar` のランタイム capability を呼んでシーンを構築します。
