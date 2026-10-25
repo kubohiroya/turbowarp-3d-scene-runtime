@@ -2,7 +2,7 @@
 
 <img src="assets/block-icon.svg" alt="" width="48" height="48">
 
-**English** | [日本語](README.ja.md)
+English | [日本語](README.ja.md)
 
 TurboWarp-3D-Scene-Runtime applies a 3D/AR scene written as YAML or JSON. One block takes the
 description; the extension validates it, turns it into a call plan, and builds the scene by calling
