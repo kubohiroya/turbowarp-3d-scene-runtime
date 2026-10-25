@@ -1,6 +1,6 @@
 {
   "name": "@kubohiroya/turbowarp-3d-scene-runtime",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A TurboWarp extension that applies a 3D/AR scene description by dispatching its call plan to turbowarp-aframe and turbowarp-ar.",
   "author": "Hiroya Kubo <hiroya@cuc.ac.jp>",
   "license": "MPL-2.0",
@@ -94,9 +94,9 @@
       "import": "./lib-module/src/bundle-module.js"
     }
   },
-  "gitHead": "e25b455f7d75db7bb1b97193f781a64acddd1df8",
+  "gitHead": "2dd6a9a779a45d4e3d04cbf237ae68764f36b1a1",
   "x-turbowarp-source": {
-    "revision": "e25b455f7d75db7bb1b97193f781a64acddd1df8",
+    "revision": "2dd6a9a779a45d4e3d04cbf237ae68764f36b1a1",
     "revisionRole": "base-commit",
     "sourceState": "local-release-overlay"
   }
