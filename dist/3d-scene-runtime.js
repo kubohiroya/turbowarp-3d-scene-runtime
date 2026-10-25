@@ -6529,22 +6529,27 @@
   ];
   var blockDefinitions = block_definitions_default.blocks;
   var TurboWarp3DSceneRuntimeExtension = class {
-  	constructor() {
+  	dispose() {
+  		if (this.disposed) return;
+  		this.disposed = true;
+  		this.removeSourceEditors();
+  		(this.scratch.vm?.runtime)?.off?.("RUNTIME_DISPOSED", this.handleSourceEditorDispose);
+  	}
+  	constructor(scratch) {
+  		this.scratch = scratch;
   		this.status = "idle";
   		this.lastError = "";
   		this.appliedEvents = 0;
   		this.applyGeneration = 0;
-  		this.handleSourceEditorDispose = () => {
-  			this.removeSourceEditors();
-  			(Scratch.vm?.runtime)?.off?.("RUNTIME_DISPOSED", this.handleSourceEditorDispose);
-  		};
-  		this.removeSourceEditors = registerSourceEditors(Scratch);
-  		(Scratch.vm?.runtime)?.on?.("RUNTIME_DISPOSED", this.handleSourceEditorDispose);
+  		this.disposed = false;
+  		this.handleSourceEditorDispose = () => this.dispose();
+  		this.removeSourceEditors = registerSourceEditors(this.scratch);
+  		(this.scratch.vm?.runtime)?.on?.("RUNTIME_DISPOSED", this.handleSourceEditorDispose);
   	}
   	getInfo() {
   		return {
   			id: extensionConfig.id,
-  			name: Scratch.translate(block_definitions_default.extensionName),
+  			name: this.scratch.translate(block_definitions_default.extensionName),
   			docsURI: extensionConfig.docsURI,
   			blockIconURI: extensionConfig.blockIconURI,
   			blocks: blockDefinitions.map((block) => this.toScratchBlock(block))
@@ -6555,7 +6560,7 @@
   		this.status = "applying";
   		this.lastError = "";
   		try {
-  			const calls = this.planFor(Scratch.Cast.toString(args.SOURCE));
+  			const calls = this.planFor(this.scratch.Cast.toString(args.SOURCE));
   			await this.dispatch(calls);
   			if (generation !== this.applyGeneration) return;
   			this.status = "ready";
@@ -6655,28 +6660,37 @@
   		return port;
   	}
   	capability(key, methods) {
-  		const candidate = Scratch.vm?.runtime?.[key];
+  		const candidate = this.scratch.vm?.runtime?.[key];
   		if (typeof candidate !== "object" || candidate === null) return null;
   		const port = candidate;
   		for (const method of methods) if (typeof port[method] !== "function") return null;
   		return candidate;
   	}
   	toScratchBlock(block) {
-  		const text = Scratch.translate(block.text);
+  		const text = this.scratch.translate(block.text);
   		const displayText = /^\d/u.test(text) ? ` ${text}` : text;
   		return {
   			opcode: block.opcode,
-  			blockType: Scratch.BlockType[block.blockType],
+  			blockType: this.scratch.BlockType[block.blockType],
   			text: displayText,
   			...block.blockType === "HAT" ? { isEdgeActivated: false } : {},
   			arguments: Object.fromEntries(Object.entries(block.arguments).map(([name, argument]) => [name, {
-  				type: Scratch.ArgumentType[argument.type],
+  				type: this.scratch.ArgumentType[argument.type],
   				defaultValue: argument.defaultValue
   			}]))
   		};
   	}
   };
+  Object.freeze({
+  	formatVersion: 1,
+  	id: extensionConfig.id,
+  	unsandboxed: extensionConfig.unsandboxed ? "required" : "not-needed"
+  });
+  /** The caller supplies the member host and owns registration and lifetime. */
+  function createExtension(scratch) {
+  	return new TurboWarp3DSceneRuntimeExtension(scratch);
+  }
   if (extensionConfig.unsandboxed && !Scratch.extensions.unsandboxed) throw new Error(`${extensionConfig.name} must run unsandboxed.`);
-  Scratch.extensions.register(new TurboWarp3DSceneRuntimeExtension());
+  Scratch.extensions.register(createExtension(Scratch));
 
 })(Scratch);

@@ -1,3 +1,4 @@
+import type {ScratchApi, TurboWarpExtension} from './runtime-api.js';
 import {registerSourceEditors} from './source-editors.js';
 import {
   createTurboWarpExtensionPlan,
@@ -5,8 +6,8 @@ import {
 } from '@kubohiroya/turbowarp-scene-graph';
 import {decodeSceneSource} from './scene-input.js';
 
-import {extensionConfig} from './config';
-import definitions from './block-definitions.json';
+import {extensionConfig} from './config.js';
+import definitions from './block-definitions.json' with {type: 'json'};
 
 type BlockTypeName = 'COMMAND' | 'REPORTER' | 'BOOLEAN' | 'HAT';
 type ArgumentTypeName = 'STRING';
@@ -73,22 +74,27 @@ export class TurboWarp3DSceneRuntimeExtension implements TurboWarpExtension {
   private applyGeneration = 0;
 
   private readonly removeSourceEditors: () => void;
-  private readonly handleSourceEditorDispose = (): void => {
-    this.removeSourceEditors();
-    const runtime = Scratch.vm?.runtime as {off?: (event: string, listener: () => void) => void} | undefined;
-    runtime?.off?.('RUNTIME_DISPOSED', this.handleSourceEditorDispose);
-  };
+  private disposed = false;
+  private readonly handleSourceEditorDispose = (): void => this.dispose();
 
-  public constructor() {
-    this.removeSourceEditors = registerSourceEditors(Scratch);
-    const runtime = Scratch.vm?.runtime as {on?: (event: string, listener: () => void) => void} | undefined;
+  public dispose(): void {
+    if (this.disposed) return;
+    this.disposed = true;
+    this.removeSourceEditors();
+    const runtime = this.scratch.vm?.runtime as {off?: (event: string, listener: () => void) => void} | undefined;
+    runtime?.off?.('RUNTIME_DISPOSED', this.handleSourceEditorDispose);
+  }
+
+  public constructor(private readonly scratch: ScratchApi) {
+    this.removeSourceEditors = registerSourceEditors(this.scratch);
+    const runtime = this.scratch.vm?.runtime as {on?: (event: string, listener: () => void) => void} | undefined;
     runtime?.on?.('RUNTIME_DISPOSED', this.handleSourceEditorDispose);
   }
 
   public getInfo(): Record<string, unknown> {
     return {
       id: extensionConfig.id,
-      name: Scratch.translate(definitions.extensionName),
+      name: this.scratch.translate(definitions.extensionName),
       docsURI: extensionConfig.docsURI,
       blockIconURI: extensionConfig.blockIconURI,
       blocks: blockDefinitions.map((block) => this.toScratchBlock(block))
@@ -100,7 +106,7 @@ export class TurboWarp3DSceneRuntimeExtension implements TurboWarpExtension {
     this.status = 'applying';
     this.lastError = '';
     try {
-      const calls = this.planFor(Scratch.Cast.toString(args.SOURCE));
+      const calls = this.planFor(this.scratch.Cast.toString(args.SOURCE));
       await this.dispatch(calls);
       if (generation !== this.applyGeneration) return;
       this.status = 'ready';
@@ -231,7 +237,7 @@ export class TurboWarp3DSceneRuntimeExtension implements TurboWarpExtension {
   }
 
   private capability<T>(key: string, methods: readonly string[]): T | null {
-    const candidate = Scratch.vm?.runtime?.[key];
+    const candidate = this.scratch.vm?.runtime?.[key];
     if (typeof candidate !== 'object' || candidate === null) return null;
     const port = candidate as Record<string, unknown>;
     for (const method of methods) {
@@ -241,19 +247,19 @@ export class TurboWarp3DSceneRuntimeExtension implements TurboWarpExtension {
   }
 
   private toScratchBlock(block: BlockDefinition): Record<string, unknown> {
-    const text = Scratch.translate(block.text);
+    const text = this.scratch.translate(block.text);
     // Separate a leading digit from the VM's icon placeholder ("%2" + "3D" becomes "%23D").
     const displayText = /^\d/u.test(text) ? ` ${text}` : text;
     return {
       opcode: block.opcode,
-      blockType: Scratch.BlockType[block.blockType],
+      blockType: this.scratch.BlockType[block.blockType],
       text: displayText,
       ...(block.blockType === 'HAT' ? {isEdgeActivated: false} : {}),
       arguments: Object.fromEntries(
         Object.entries(block.arguments).map(([name, argument]) => [
           name,
           {
-            type: Scratch.ArgumentType[argument.type],
+            type: this.scratch.ArgumentType[argument.type],
             defaultValue: argument.defaultValue
           }
         ])

@@ -59,7 +59,7 @@ afterEach(() => {
 
 describe('TurboWarp3DSceneRuntimeExtension', () => {
   it('publishes its metadata and blocks', () => {
-    const info = new TurboWarp3DSceneRuntimeExtension().getInfo() as {
+    const info = new TurboWarp3DSceneRuntimeExtension(Scratch).getInfo() as {
       id: string;
       blocks: Array<{opcode: string; isEdgeActivated?: boolean; blockType: string}>;
     };
@@ -78,7 +78,7 @@ describe('TurboWarp3DSceneRuntimeExtension', () => {
   it('builds a bare scene document through the A-Frame capability', async () => {
     const aframe = aframePort();
     stubScratch({turbowarpAFrameCapability: aframe});
-    const extension = new TurboWarp3DSceneRuntimeExtension();
+    const extension = new TurboWarp3DSceneRuntimeExtension(Scratch);
 
     await extension.applyScene({SOURCE: SCENE});
 
@@ -99,7 +99,7 @@ describe('TurboWarp3DSceneRuntimeExtension', () => {
     ar.createARScene.mockImplementation(async () => void order.push('createARScene'));
     ar.attachSelectorToARTarget.mockImplementation(() => void order.push('attach'));
     stubScratch({turbowarpAFrameCapability: aframe, turbowarpARCapability: ar});
-    const extension = new TurboWarp3DSceneRuntimeExtension();
+    const extension = new TurboWarp3DSceneRuntimeExtension(Scratch);
 
     await extension.applyScene({
       SOURCE: [
@@ -127,7 +127,7 @@ describe('TurboWarp3DSceneRuntimeExtension', () => {
 
   it('fires the applied hat once per apply', async () => {
     stubScratch({turbowarpAFrameCapability: aframePort()});
-    const extension = new TurboWarp3DSceneRuntimeExtension();
+    const extension = new TurboWarp3DSceneRuntimeExtension(Scratch);
 
     expect(extension.whenSceneApplied()).toBe(false);
     await extension.applyScene({SOURCE: SCENE});
@@ -136,7 +136,7 @@ describe('TurboWarp3DSceneRuntimeExtension', () => {
   });
 
   it('reports a missing companion extension instead of throwing', async () => {
-    const extension = new TurboWarp3DSceneRuntimeExtension();
+    const extension = new TurboWarp3DSceneRuntimeExtension(Scratch);
 
     await extension.applyScene({SOURCE: SCENE});
 
@@ -149,7 +149,7 @@ describe('TurboWarp3DSceneRuntimeExtension', () => {
     const withoutAddClass: Record<string, unknown> = {...aframePort()};
     delete withoutAddClass['addClass'];
     stubScratch({turbowarpAFrameCapability: withoutAddClass});
-    const extension = new TurboWarp3DSceneRuntimeExtension();
+    const extension = new TurboWarp3DSceneRuntimeExtension(Scratch);
 
     await extension.applyScene({SOURCE: SCENE});
 
@@ -158,7 +158,7 @@ describe('TurboWarp3DSceneRuntimeExtension', () => {
 
   it('reports a missing AR extension only when the scene asks for AR', async () => {
     stubScratch({turbowarpAFrameCapability: aframePort()});
-    const extension = new TurboWarp3DSceneRuntimeExtension();
+    const extension = new TurboWarp3DSceneRuntimeExtension(Scratch);
 
     await extension.applyScene({SOURCE: 'ar:\n  cameraId: front\n'});
 
@@ -167,7 +167,7 @@ describe('TurboWarp3DSceneRuntimeExtension', () => {
 
   it('reports a malformed description as an error, not a crash', async () => {
     stubScratch({turbowarpAFrameCapability: aframePort()});
-    const extension = new TurboWarp3DSceneRuntimeExtension();
+    const extension = new TurboWarp3DSceneRuntimeExtension(Scratch);
 
     await extension.applyScene({SOURCE: '- not\n- an object\n'});
     expect(extension.sceneError()).toBe('3D scene description must be a YAML or JSON object.');
@@ -179,7 +179,7 @@ describe('TurboWarp3DSceneRuntimeExtension', () => {
   it('treats an empty description as nothing to do', async () => {
     const aframe = aframePort();
     stubScratch({turbowarpAFrameCapability: aframe});
-    const extension = new TurboWarp3DSceneRuntimeExtension();
+    const extension = new TurboWarp3DSceneRuntimeExtension(Scratch);
 
     await extension.applyScene({SOURCE: '   '});
 
@@ -190,7 +190,7 @@ describe('TurboWarp3DSceneRuntimeExtension', () => {
 
 describe('palette text compatibility', () => {
   it('separates digit-leading reporter labels while preserving opcodes and arguments', () => {
-    const info = new TurboWarp3DSceneRuntimeExtension().getInfo() as {blocks: {opcode: string; text: string; arguments: Record<string, unknown>}[]};
+    const info = new TurboWarp3DSceneRuntimeExtension(Scratch).getInfo() as {blocks: {opcode: string; text: string; arguments: Record<string, unknown>}[]};
     expect(info.blocks.map(block => block.opcode)).toEqual(definitions.blocks.map(block => block.opcode));
     for (const block of info.blocks) {
       const definition = definitions.blocks.find(definition => definition.opcode === block.opcode)!;
@@ -202,7 +202,7 @@ describe('palette text compatibility', () => {
 
   it('separates translated digit-leading text without depending on the original English label', () => {
     vi.stubGlobal('Scratch', {...Scratch, translate: () => '9 localized label'});
-    const info = new TurboWarp3DSceneRuntimeExtension().getInfo() as {blocks: {text: string}[]};
+    const info = new TurboWarp3DSceneRuntimeExtension(Scratch).getInfo() as {blocks: {text: string}[]};
     expect(info.blocks.every(block => block.text === ' 9 localized label')).toBe(true);
   });
 });
