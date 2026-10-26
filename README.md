@@ -195,6 +195,7 @@ this module entry. No runtime flag or saved-data migration is introduced.
 Production dependencies are scene-graph 0.2.3 (with upstream AR 0.4.2) and yaml. Data-editor is a development dependency for types and editor contract tests; `pnpm run check:production-deps` rejects transitive Ajv and editor engines. See the [editor boundary notes](docs/editor-runtime-boundary.ja.md) for candidate verification and publication order.
 
 ```bash
+npm install --global corepack@latest
 corepack enable
 pnpm install --frozen-lockfile
 pnpm run check
