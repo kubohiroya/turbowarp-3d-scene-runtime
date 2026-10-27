@@ -1,0 +1,35 @@
+{
+  "baseURL": "https://kubohiroya.github.io/turbowarp-3d-scene-runtime/",
+  "extension": {
+    "id": "kubohiroya3dsceneruntime",
+    "bundle": "dist/3d-scene-runtime.js",
+    "unsandboxed": true,
+    "dependencies": [
+      {
+        "id": "turbowarpaframe",
+        "bundle": "samples/dependencies/turbowarp-aframe.js",
+        "sha256": "6f984c03eeb7943f1497290e22a156ab7e52a90897ac0e2c181ac816aed43f60"
+      }
+    ]
+  },
+  "samples": [
+    {
+      "name": "apply-one-cube-scene",
+      "title": "Apply one cube scene",
+      "checks": [
+        {
+          "variable": "cube-count",
+          "equals": 1
+        },
+        {
+          "variable": "scene-status",
+          "equals": "ready"
+        }
+      ],
+      "keyCheck": {
+        "variable": "action",
+        "equals": "Cube moved +0.5 on x"
+      }
+    }
+  ]
+}

@@ -11,6 +11,16 @@ TurboWarp-3D-Scene-Runtime は、YAML または JSON で書いた 3D/AR シー�
 `./editor-metadata`と既存`./editor-schema`はSchema宣言とpure owner検証を提供し、編集用Schema compileとAjvは共通GUIが担当します。
 詳細と互換性は[編集とruntimeの境界](docs/editor-runtime-boundary.ja.md)を参照してください。
 
+## 最小デモ
+
+[TurboWarp Editorで開く](https://turbowarp.org/editor?project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-3d-scene-runtime%2Fsamples%2Fapply-one-cube-scene.sb3) · [SB3](https://kubohiroya.github.io/turbowarp-3d-scene-runtime/samples/apply-one-cube-scene.sb3)
+
+読み込み時に同梱拡張の「Run extension without sandbox」を選びAllow。緑の旗で立方体を作り、Spaceで立方体を右へ0.5移動します。再度緑の旗で初期状態に戻ります。
+
+WebGL対応ブラウザとjsDelivrへの接続が必要です。A-Frame 1.8.0を本体が読み込みます。停止ボタンでは描画シーンは残り、再実行時に置き換わります。 検証済みA-Frame拡張もSB3に同梱しています。
+
+[編集・再生成手順](samples/README.md)
+
 ## できること
 
 - scene graph document、または両方を持つ `{scene3d, ar}` 断片を受け取ります。

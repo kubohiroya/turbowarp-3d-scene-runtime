@@ -1,0 +1,447 @@
+{
+  "targets": [
+    {
+      "isStage": true,
+      "name": "Stage",
+      "variables": {
+        "sample-state": [
+          "State",
+          ""
+        ],
+        "cube-count": [
+          "Cubes",
+          ""
+        ],
+        "action": [
+          "Action",
+          ""
+        ],
+        "scene-status": [
+          "Scene status",
+          ""
+        ]
+      },
+      "lists": {},
+      "broadcasts": {},
+      "blocks": {
+        "b1": {
+          "opcode": "event_whenflagclicked",
+          "parent": null,
+          "next": "b2",
+          "inputs": {},
+          "fields": {},
+          "shadow": false,
+          "topLevel": true,
+          "x": 35,
+          "y": 35
+        },
+        "b2": {
+          "opcode": "data_setvariableto",
+          "parent": "b1",
+          "next": "b3",
+          "inputs": {
+            "VALUE": [
+              1,
+              [
+                10,
+                "Running"
+              ]
+            ]
+          },
+          "fields": {
+            "VARIABLE": [
+              "State",
+              "sample-state"
+            ]
+          },
+          "shadow": false,
+          "topLevel": false
+        },
+        "b3": {
+          "opcode": "kubohiroya3dsceneruntime_applyScene",
+          "parent": "b2",
+          "next": "b4",
+          "inputs": {
+            "SOURCE": [
+              1,
+              [
+                10,
+                "{\"formatVersion\": 1, \"root\": {\"children\": [{\"type\": \"box\", \"id\": \"sample-cube\", \"attributes\": {\"position\": \"0 1 -3\", \"rotation\": \"15 35 0\", \"color\": \"#4cffb0\"}}]}}"
+              ]
+            ]
+          },
+          "fields": {},
+          "shadow": false,
+          "topLevel": false
+        },
+        "b4": {
+          "opcode": "data_setvariableto",
+          "parent": "b3",
+          "next": "b6",
+          "inputs": {
+            "VALUE": [
+              3,
+              "b5",
+              [
+                10,
+                ""
+              ]
+            ]
+          },
+          "fields": {
+            "VARIABLE": [
+              "Scene status",
+              "scene-status"
+            ]
+          },
+          "shadow": false,
+          "topLevel": false
+        },
+        "b5": {
+          "opcode": "kubohiroya3dsceneruntime_sceneStatus",
+          "parent": "b4",
+          "next": null,
+          "inputs": {},
+          "fields": {},
+          "shadow": false,
+          "topLevel": false
+        },
+        "b6": {
+          "opcode": "turbowarpaframe_setAttribute",
+          "parent": "b4",
+          "next": "b7",
+          "inputs": {
+            "SELECTOR": [
+              1,
+              [
+                10,
+                "#scene"
+              ]
+            ],
+            "NAME": [
+              1,
+              [
+                10,
+                "embedded"
+              ]
+            ],
+            "VALUE": [
+              1,
+              [
+                10,
+                "true"
+              ]
+            ]
+          },
+          "fields": {},
+          "shadow": false,
+          "topLevel": false
+        },
+        "b7": {
+          "opcode": "turbowarpaframe_setAttribute",
+          "parent": "b6",
+          "next": "b8",
+          "inputs": {
+            "SELECTOR": [
+              1,
+              [
+                10,
+                "#scene"
+              ]
+            ],
+            "NAME": [
+              1,
+              [
+                10,
+                "vr-mode-ui"
+              ]
+            ],
+            "VALUE": [
+              1,
+              [
+                10,
+                "enabled: false"
+              ]
+            ]
+          },
+          "fields": {},
+          "shadow": false,
+          "topLevel": false
+        },
+        "b8": {
+          "opcode": "turbowarpaframe_setAttribute",
+          "parent": "b7",
+          "next": "b9",
+          "inputs": {
+            "SELECTOR": [
+              1,
+              [
+                10,
+                "#scene"
+              ]
+            ],
+            "NAME": [
+              1,
+              [
+                10,
+                "background"
+              ]
+            ],
+            "VALUE": [
+              1,
+              [
+                10,
+                "color: #182438"
+              ]
+            ]
+          },
+          "fields": {},
+          "shadow": false,
+          "topLevel": false
+        },
+        "b9": {
+          "opcode": "data_setvariableto",
+          "parent": "b8",
+          "next": "b11",
+          "inputs": {
+            "VALUE": [
+              3,
+              "b10",
+              [
+                10,
+                ""
+              ]
+            ]
+          },
+          "fields": {
+            "VARIABLE": [
+              "Cubes",
+              "cube-count"
+            ]
+          },
+          "shadow": false,
+          "topLevel": false
+        },
+        "b10": {
+          "opcode": "turbowarpaframe_countSelector",
+          "parent": "b9",
+          "next": null,
+          "inputs": {
+            "SELECTOR": [
+              1,
+              [
+                10,
+                "#sample-cube"
+              ]
+            ]
+          },
+          "fields": {},
+          "shadow": false,
+          "topLevel": false
+        },
+        "b11": {
+          "opcode": "data_setvariableto",
+          "parent": "b9",
+          "next": "b12",
+          "inputs": {
+            "VALUE": [
+              1,
+              [
+                10,
+                "Space: move cube"
+              ]
+            ]
+          },
+          "fields": {
+            "VARIABLE": [
+              "Action",
+              "action"
+            ]
+          },
+          "shadow": false,
+          "topLevel": false
+        },
+        "b12": {
+          "opcode": "data_setvariableto",
+          "parent": "b11",
+          "next": null,
+          "inputs": {
+            "VALUE": [
+              1,
+              [
+                10,
+                "Ready"
+              ]
+            ]
+          },
+          "fields": {
+            "VARIABLE": [
+              "State",
+              "sample-state"
+            ]
+          },
+          "shadow": false,
+          "topLevel": false
+        },
+        "b13": {
+          "opcode": "event_whenkeypressed",
+          "parent": null,
+          "next": "b14",
+          "inputs": {},
+          "fields": {
+            "KEY_OPTION": [
+              "space",
+              null
+            ]
+          },
+          "shadow": false,
+          "topLevel": true,
+          "x": 520,
+          "y": 35
+        },
+        "b14": {
+          "opcode": "turbowarpaframe_moveBy",
+          "parent": "b13",
+          "next": "b15",
+          "inputs": {
+            "SELECTOR": [
+              1,
+              [
+                10,
+                "#sample-cube"
+              ]
+            ],
+            "X": [
+              1,
+              [
+                10,
+                "0.5"
+              ]
+            ],
+            "Y": [
+              1,
+              [
+                10,
+                "0"
+              ]
+            ],
+            "Z": [
+              1,
+              [
+                10,
+                "0"
+              ]
+            ]
+          },
+          "fields": {},
+          "shadow": false,
+          "topLevel": false
+        },
+        "b15": {
+          "opcode": "data_setvariableto",
+          "parent": "b14",
+          "next": null,
+          "inputs": {
+            "VALUE": [
+              1,
+              [
+                10,
+                "Cube moved +0.5 on x"
+              ]
+            ]
+          },
+          "fields": {
+            "VARIABLE": [
+              "Action",
+              "action"
+            ]
+          },
+          "shadow": false,
+          "topLevel": false
+        }
+      },
+      "comments": {},
+      "currentCostume": 0,
+      "costumes": [
+        {
+          "assetId": "",
+          "name": "Instructions",
+          "bitmapResolution": 1,
+          "md5ext": "backdrop.svg",
+          "dataFormat": "svg",
+          "rotationCenterX": 240,
+          "rotationCenterY": 180
+        }
+      ],
+      "sounds": [],
+      "volume": 100,
+      "layerOrder": 0,
+      "tempo": 60,
+      "videoTransparency": 50,
+      "videoState": "off",
+      "textToSpeechLanguage": null
+    }
+  ],
+  "monitors": [
+    {
+      "id": "cube-count",
+      "mode": "default",
+      "opcode": "data_variable",
+      "params": {
+        "VARIABLE": "Cubes"
+      },
+      "spriteName": null,
+      "value": "",
+      "width": 0,
+      "height": 0,
+      "x": 18,
+      "y": 115,
+      "visible": true,
+      "sliderMin": 0,
+      "sliderMax": 100,
+      "isDiscrete": true
+    },
+    {
+      "id": "action",
+      "mode": "default",
+      "opcode": "data_variable",
+      "params": {
+        "VARIABLE": "Action"
+      },
+      "spriteName": null,
+      "value": "",
+      "width": 0,
+      "height": 0,
+      "x": 18,
+      "y": 148,
+      "visible": true,
+      "sliderMin": 0,
+      "sliderMax": 100,
+      "isDiscrete": true
+    },
+    {
+      "id": "scene-status",
+      "mode": "default",
+      "opcode": "data_variable",
+      "params": {
+        "VARIABLE": "Scene status"
+      },
+      "spriteName": null,
+      "value": "",
+      "width": 0,
+      "height": 0,
+      "x": 18,
+      "y": 181,
+      "visible": true,
+      "sliderMin": 0,
+      "sliderMax": 100,
+      "isDiscrete": true
+    }
+  ],
+  "extensions": [],
+  "meta": {
+    "semver": "3.0.0",
+    "vm": "0.2.0",
+    "agent": "TurboWarp Plus minimal samples"
+  }
+}
