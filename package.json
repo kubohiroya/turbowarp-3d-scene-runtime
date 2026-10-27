@@ -1,6 +1,6 @@
 {
   "name": "@kubohiroya/turbowarp-3d-scene-runtime",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "A TurboWarp extension that applies a 3D/AR scene description by dispatching its call plan to turbowarp-aframe and turbowarp-ar.",
   "author": "Hiroya Kubo <hiroya@cuc.ac.jp>",
   "license": "MPL-2.0",
@@ -64,8 +64,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
-    "@kubohiroya/turbowarp-extension-manifest": "^0.3.2",
-    "@kubohiroya/vite-plugin-turbowarp-extension": "^0.8.0",
+    "@kubohiroya/turbowarp-extension-manifest": "^0.4.0",
+    "@kubohiroya/vite-plugin-turbowarp-extension": "^0.9.0",
     "@types/node": "^24.13.3",
     "eslint": "^9.39.5",
     "jiti": "^2.7.0",
@@ -74,10 +74,10 @@
     "vite": "^8.2.2",
     "vitest": "^5.0.0",
     "react-dom": "18.3.1",
-    "@kubohiroya/turbowarp-extension-data-editor": "^0.3.4"
+    "@kubohiroya/turbowarp-extension-data-editor": "^0.4.0"
   },
   "dependencies": {
-    "@kubohiroya/turbowarp-scene-graph": "^0.3.0",
+    "@kubohiroya/turbowarp-scene-graph": "^0.4.0",
     "yaml": "^2.9.1"
   },
   "exports": {
@@ -95,9 +95,9 @@
       "import": "./lib-module/src/bundle-module.js"
     }
   },
-  "gitHead": "d1282e44efa47128e1421498e68033729ff02f90",
+  "gitHead": "2fb331979ffd02f459554089e4e00275f84c207e",
   "x-turbowarp-source": {
-    "revision": "d1282e44efa47128e1421498e68033729ff02f90",
+    "revision": "2fb331979ffd02f459554089e4e00275f84c207e",
     "revisionRole": "base-commit",
     "sourceState": "local-release-overlay"
   }
