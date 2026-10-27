@@ -13,6 +13,16 @@ scene is one block call rather than a rewritten project.
 
 Editor metadata and pure owner validation are available through `./editor-metadata`; the common GUI owns Schema compilation and Ajv. See [the runtime/editor boundary](docs/editor-runtime-boundary.ja.md) for compatibility and rollback details.
 
+## Minimal demo
+
+[Open in TurboWarp Editor](https://turbowarp.org/editor?project_url=https%3A%2F%2Fkubohiroya.github.io%2Fturbowarp-3d-scene-runtime%2Fsamples%2Fapply-one-cube-scene.sb3) · [SB3](https://kubohiroya.github.io/turbowarp-3d-scene-runtime/samples/apply-one-cube-scene.sb3)
+
+Select “Run extension without sandbox” and Allow for each embedded extension. Green flag creates one cube; Space moves the cube 0.5 to the right. C removes the cube; green flag resets the scene.
+
+Requires a WebGL browser and access to jsDelivr for A-Frame 1.8.0. Stop and C leave the rendering canvas active. Close the tab to end GPU rendering; there is currently no scene shutdown block. Running again replaces the previous scene. The tested A-Frame companion extension is embedded in the SB3.
+
+[Source and regeneration](samples/README.md)
+
 ## What it does
 
 - Accepts a scene graph document, or a `{scene3d, ar}` fragment carrying both halves.
