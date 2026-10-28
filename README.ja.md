@@ -43,13 +43,13 @@ WebGL対応ブラウザとjsDelivrへの接続が必要です。A-Frame 1.8.0を
 連携拡張を先に読み込み、その後にこの拡張を unsandboxed custom extension として読み込みます。
 
 ```text
-https://cdn.jsdelivr.net/npm/@kubohiroya/turbowarp-3d-scene-runtime@0.5.0/dist/3d-scene-runtime.js
+https://cdn.jsdelivr.net/npm/@kubohiroya/turbowarp-3d-scene-runtime@0.6.0/dist/3d-scene-runtime.js
 ```
 
 ローカル開発:
 
 ```bash
-pnpm add @kubohiroya/turbowarp-3d-scene-runtime@0.5.0
+pnpm add @kubohiroya/turbowarp-3d-scene-runtime@0.6.0
 ```
 
 ## クイックスタート

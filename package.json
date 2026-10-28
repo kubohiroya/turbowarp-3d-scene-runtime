@@ -1,8 +1,12 @@
 {
   "name": "@kubohiroya/turbowarp-3d-scene-runtime",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A TurboWarp extension that applies a 3D/AR scene description by dispatching its call plan to turbowarp-aframe and turbowarp-ar.",
-  "author": "Hiroya Kubo <hiroya@cuc.ac.jp>",
+  "author": {
+    "name": "Hiroya Kubo",
+    "email": "hiroya@cuc.ac.jp",
+    "url": "https://github.com/kubohiroya"
+  },
   "license": "MPL-2.0",
   "homepage": "https://github.com/kubohiroya/turbowarp-3d-scene-runtime#readme",
   "repository": {
@@ -67,8 +71,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
-    "@kubohiroya/turbowarp-extension-manifest": "^0.4.0",
-    "@kubohiroya/vite-plugin-turbowarp-extension": "^0.9.0",
+    "@kubohiroya/turbowarp-extension-manifest": "^0.5.0",
+    "@kubohiroya/vite-plugin-turbowarp-extension": "^0.10.0",
     "@types/node": "^24.13.3",
     "eslint": "^9.39.5",
     "jiti": "^2.7.0",
@@ -77,10 +81,10 @@
     "vite": "^8.2.2",
     "vitest": "^5.0.0",
     "react-dom": "18.3.1",
-    "@kubohiroya/turbowarp-extension-data-editor": "^0.4.0"
+    "@kubohiroya/turbowarp-extension-data-editor": "^0.5.0"
   },
   "dependencies": {
-    "@kubohiroya/turbowarp-scene-graph": "^0.4.0",
+    "@kubohiroya/turbowarp-scene-graph": "^0.5.0",
     "yaml": "^2.9.1"
   },
   "exports": {
