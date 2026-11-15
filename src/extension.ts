@@ -73,22 +73,15 @@ export class TurboWarp3DSceneRuntimeExtension implements TurboWarpExtension {
   /** Guards against two applies interleaving their calls into one scene. */
   private applyGeneration = 0;
 
+  /** Released on each project load and registered again for the next project; final on dispose. */
   private readonly removeSourceEditors: () => void;
-  private disposed = false;
-  private readonly handleSourceEditorDispose = (): void => this.dispose();
 
   public dispose(): void {
-    if (this.disposed) return;
-    this.disposed = true;
     this.removeSourceEditors();
-    const runtime = this.scratch.vm?.runtime as {off?: (event: string, listener: () => void) => void} | undefined;
-    runtime?.off?.('RUNTIME_DISPOSED', this.handleSourceEditorDispose);
   }
 
   public constructor(private readonly scratch: ScratchApi) {
     this.removeSourceEditors = registerSourceEditors(this.scratch);
-    const runtime = this.scratch.vm?.runtime as {on?: (event: string, listener: () => void) => void} | undefined;
-    runtime?.on?.('RUNTIME_DISPOSED', this.handleSourceEditorDispose);
   }
 
   public getInfo(): Record<string, unknown> {

@@ -171,23 +171,49 @@ function createSourceEditorOptions(nowMs = Date.now) {
 		validationContext: context
 	}];
 }
-/** Optional capability: old GUIs continue executing blocks without editor registration. */
+/**
+* Optional capability: old GUIs continue executing blocks without editor registration.
+* Every project load disposes the runtime, which releases the registrations, but the extension
+* stays loaded for the next project, so they are registered again once that project has loaded.
+* Only the returned owner dispose is final.
+*/
 function registerSourceEditors(scratch, nowMs = Date.now) {
-	const api = scratch?.gui?.blockEditors;
+	const host = scratch;
+	const api = host?.gui?.blockEditors;
 	if (api?.apiVersion !== 1 || typeof api.registerSourceEditor !== "function") return () => {};
+	const runtime = host?.vm?.runtime;
 	const removers = [];
-	try {
-		for (const options of createSourceEditorOptions(nowMs)) removers.push(api.registerSourceEditor(options));
-	} catch {
-		for (const remove of removers.reverse()) remove();
-		return () => {};
-	}
-	let active = true;
-	return () => {
-		if (active) {
-			active = false;
-			for (const remove of removers.reverse()) remove();
+	const release = () => {
+		for (const remove of removers.splice(0).reverse()) remove();
+	};
+	const register = () => {
+		try {
+			for (const options of createSourceEditorOptions(nowMs)) removers.push(api.registerSourceEditor(options));
+			return true;
+		} catch {
+			release();
+			return false;
 		}
+	};
+	if (!register()) return () => {};
+	let active = true;
+	let released = false;
+	const releaseForProjectLoad = () => {
+		if (!active || released) return;
+		released = true;
+		release();
+	};
+	const restoreAfterProjectLoad = () => {
+		if (active && released && register()) released = false;
+	};
+	runtime?.on?.("RUNTIME_DISPOSED", releaseForProjectLoad);
+	runtime?.on?.("PROJECT_LOADED", restoreAfterProjectLoad);
+	return () => {
+		if (!active) return;
+		active = false;
+		runtime?.off?.("RUNTIME_DISPOSED", releaseForProjectLoad);
+		runtime?.off?.("PROJECT_LOADED", restoreAfterProjectLoad);
+		release();
 	};
 }
 var block_definitions_default = {
@@ -251,10 +277,7 @@ var AR_PORT_METHODS = [
 var blockDefinitions = block_definitions_default.blocks;
 var TurboWarp3DSceneRuntimeExtension = class {
 	dispose() {
-		if (this.disposed) return;
-		this.disposed = true;
 		this.removeSourceEditors();
-		(this.scratch.vm?.runtime)?.off?.("RUNTIME_DISPOSED", this.handleSourceEditorDispose);
 	}
 	constructor(scratch) {
 		this.scratch = scratch;
@@ -262,10 +285,7 @@ var TurboWarp3DSceneRuntimeExtension = class {
 		this.lastError = "";
 		this.appliedEvents = 0;
 		this.applyGeneration = 0;
-		this.disposed = false;
-		this.handleSourceEditorDispose = () => this.dispose();
 		this.removeSourceEditors = registerSourceEditors(this.scratch);
-		(this.scratch.vm?.runtime)?.on?.("RUNTIME_DISPOSED", this.handleSourceEditorDispose);
 	}
 	getInfo() {
 		return {
