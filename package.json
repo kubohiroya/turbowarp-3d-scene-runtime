@@ -1,6 +1,6 @@
 {
   "name": "@kubohiroya/turbowarp-3d-scene-runtime",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "A TurboWarp extension that applies a 3D/AR scene description by dispatching its call plan to turbowarp-aframe and turbowarp-ar.",
   "author": {
     "name": "Hiroya Kubo",
