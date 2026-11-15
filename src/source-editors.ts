@@ -14,17 +14,47 @@ export function createSourceEditorOptions(nowMs: () => number = Date.now): reado
   ];
 }
 
-/** Optional capability: old GUIs continue executing blocks without editor registration. */
+/**
+ * Optional capability: old GUIs continue executing blocks without editor registration.
+ * Every project load disposes the runtime, which releases the registrations, but the extension
+ * stays loaded for the next project, so they are registered again once that project has loaded.
+ * Only the returned owner dispose is final.
+ */
 export function registerSourceEditors(scratch: unknown, nowMs: () => number = Date.now): () => void {
-  const api = (scratch as {gui?: {blockEditors?: {apiVersion?: number; registerSourceEditor?: (options: SourceEditorOptions) => () => void}}})?.gui?.blockEditors;
+  const host = scratch as {gui?: {blockEditors?: {apiVersion?: number; registerSourceEditor?: (options: SourceEditorOptions) => () => void}};
+    vm?: {runtime?: {on?: (event: string, listener: () => void) => void; off?: (event: string, listener: () => void) => void}}} | undefined;
+  const api = host?.gui?.blockEditors;
   if (api?.apiVersion !== 1 || typeof api.registerSourceEditor !== 'function') return () => {};
+  const runtime = host?.vm?.runtime;
   const removers: (() => void)[] = [];
-  try {
-    for (const options of createSourceEditorOptions(nowMs)) removers.push(api.registerSourceEditor(options));
-  } catch {
-    for (const remove of removers.reverse()) remove();
-    return () => {};
-  }
+  const release = () => {for (const remove of removers.splice(0).reverse()) remove();};
+  const register = (): boolean => {
+    try {
+      for (const options of createSourceEditorOptions(nowMs)) removers.push(api.registerSourceEditor!(options));
+      return true;
+    } catch {
+      release();
+      return false;
+    }
+  };
+  if (!register()) return () => {};
   let active = true;
-  return () => {if (active) {active = false; for (const remove of removers.reverse()) remove();}};
+  let released = false;
+  const releaseForProjectLoad = () => {
+    if (!active || released) return;
+    released = true;
+    release();
+  };
+  const restoreAfterProjectLoad = () => {
+    if (active && released && register()) released = false;
+  };
+  runtime?.on?.('RUNTIME_DISPOSED', releaseForProjectLoad);
+  runtime?.on?.('PROJECT_LOADED', restoreAfterProjectLoad);
+  return () => {
+    if (!active) return;
+    active = false;
+    runtime?.off?.('RUNTIME_DISPOSED', releaseForProjectLoad);
+    runtime?.off?.('PROJECT_LOADED', restoreAfterProjectLoad);
+    release();
+  };
 }

@@ -6,9 +6,8 @@ export declare class TurboWarp3DSceneRuntimeExtension implements TurboWarpExtens
     private appliedEvents;
     /** Guards against two applies interleaving their calls into one scene. */
     private applyGeneration;
+    /** Released on each project load and registered again for the next project; final on dispose. */
     private readonly removeSourceEditors;
-    private disposed;
-    private readonly handleSourceEditorDispose;
     dispose(): void;
     constructor(scratch: ScratchApi);
     getInfo(): Record<string, unknown>;

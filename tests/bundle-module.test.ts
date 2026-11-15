@@ -76,3 +76,25 @@ it('dispatches through the injected runtime and releases only its own editors an
   for (const remove of b.sourceCleanups) expect(remove).toHaveBeenCalledOnce();
   expect([...b.listeners.values()].every(set => set.size === 0)).toBe(true);
 });
+
+it('registers the editors again for each project the extension stays loaded for', async () => {
+  // Every project load disposes the runtime, but the extension stays loaded for the next project.
+  forbidHostGlobals();
+  const {createExtension} = await import('../src/bundle-module.js');
+  const h = makeHost();
+  const extension = createExtension(h.scratch);
+  const count = h.source.mock.calls.length;
+  expect(count).toBeGreaterThan(0);
+  h.emit('RUNTIME_DISPOSED');
+  for (const remove of h.sourceCleanups) expect(remove).toHaveBeenCalledOnce();
+  h.emit('PROJECT_LOADED');
+  expect(h.source).toHaveBeenCalledTimes(count * 2);
+  for (const remove of h.sourceCleanups.slice(count)) expect(remove).not.toHaveBeenCalled();
+  h.emit('PROJECT_LOADED');
+  expect(h.source).toHaveBeenCalledTimes(count * 2);
+  extension.dispose();
+  for (const remove of h.sourceCleanups) expect(remove).toHaveBeenCalledOnce();
+  h.emit('RUNTIME_DISPOSED'); h.emit('PROJECT_LOADED');
+  expect(h.source).toHaveBeenCalledTimes(count * 2);
+  expect([...h.listeners.values()].every(set => set.size === 0)).toBe(true);
+});
