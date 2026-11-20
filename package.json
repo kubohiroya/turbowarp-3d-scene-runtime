@@ -1,6 +1,6 @@
 {
   "name": "@kubohiroya/turbowarp-3d-scene-runtime",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "A TurboWarp extension that applies a 3D/AR scene description by dispatching its call plan to turbowarp-aframe and turbowarp-ar.",
   "author": {
     "name": "Hiroya Kubo",
@@ -107,5 +107,50 @@
     "revision": "2fb331979ffd02f459554089e4e00275f84c207e",
     "revisionRole": "base-commit",
     "sourceState": "local-release-overlay"
+  },
+  "turbowarpExtension": {
+    "resourceDeclaration": {
+      "schemaVersion": 1,
+      "resources": [
+        {
+          "type": "network",
+          "usage": "conditional",
+          "purpose": {
+            "en": "Load the 3D runtime and externally referenced scene assets",
+            "ja": "3D実行ライブラリーや外部参照のシーン素材を取得する"
+          },
+          "condition": {
+            "en": "When creating a 3D scene requiring an external runtime or asset",
+            "ja": "外部のライブラリーや素材を必要とする3Dシーンを作る場合"
+          },
+          "via": [
+            "@kubohiroya/turbowarp-aframe"
+          ],
+          "data": {
+            "direction": "download",
+            "content": {
+              "en": "3D runtime, models and scene assets",
+              "ja": "3D実行ライブラリー、モデル、シーン素材"
+            }
+          }
+        },
+        {
+          "type": "camera",
+          "usage": "conditional",
+          "purpose": {
+            "en": "Display the shared camera as an AR scene background",
+            "ja": "共有カメラの映像をARシーンの背景として表示する"
+          },
+          "condition": {
+            "en": "When applying a scene containing an AR section",
+            "ja": "ARを含むシーンを適用する場合"
+          },
+          "via": [
+            "@kubohiroya/turbowarp-ar",
+            "@kubohiroya/turbowarp-camera-source"
+          ]
+        }
+      ]
+    }
   }
 }
